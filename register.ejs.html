@@ -10,7 +10,8 @@
 
 </head>
 
-
+<body>
+  
   <form>
     <div class="container">
       <h1>Register</h1>
@@ -24,7 +25,7 @@
       <input type="text" placeholder="Enter Username" name="username" id="username" required>
     
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" id="psw" pattern="(?=.*\d)(?=.*[A-Z]).{8,}" 
+      <input type="password" placeholder="Enter Password" name="psw" id="psw" pattern="(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}" 
       title="Must contain at least one number, one uppercase letter,a symbol(eg #$*&@) and at least 8 or more characters" required>
     
       <label for="psw-repeat"><b>Repeat Password</b></label>
@@ -39,6 +40,7 @@
       <p>Already have an account? <a href="login.html">Sign in</a>.</p>
     </div>
 
+
   </form>
 
   <div id="message">
@@ -46,9 +48,10 @@
     <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
     <p id="number" class="invalid">A <b>number</b></p>
     <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-    <p id="symbols" class="invalid">A <b>symbol </b></p>
+    <p id="symbols" class="invalid">A <b>symbols </b></p>
   </div>
 
+</body>
 
   <script src="./register_functions.js">
 

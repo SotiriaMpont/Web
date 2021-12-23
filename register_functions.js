@@ -51,7 +51,8 @@ function register() {
         }
 
         // For symbols (non-word characters)
-        var symbols = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;   
+
+        var symbols = /[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]/;   
         if(passwordElement.value.match(symbols)) {
             symbols.classList.remove("invalid");
             symbols.classList.add("valid");
