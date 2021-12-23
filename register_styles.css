@@ -22,7 +22,7 @@ input[type=text]:focus, input[type=password]:focus {
   outline: none;
 }
 
-/* Overwrite default styles of hr */
+/*styles of hr */
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
@@ -30,8 +30,8 @@ hr {
 
 /* style for the submit/register button */
 .registerbtn {
-    background-color: #04AA6D;
-    color: white;
+    background-color: #4169e1;
+    color: black;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -52,4 +52,18 @@ a {
 .signin {
   background-color: #f1f1f1;
   text-align: center;
+}
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
 }
