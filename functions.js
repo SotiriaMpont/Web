@@ -1,27 +1,13 @@
-//ti tha ginei an pathsw to Submit 
-//function Submitclicked() {
-//pare to element apo to document me id= ExampleUsername  (username)
-//var usernameElement = document.getElementById('ExampleUsername');
-//pare twra thn timh tou 
-//var usernameValue = usernameElement.value;
+const { send } = require("express/lib/response");
 
-//console.log(usernameValue); //elegxos an douleuei
+function SubmitClicked() { // Otan pataw to submit sto login 
 
-//pare to element apo to document me id=ExamplePassword (password)
-// var passwordElement = document.getElementById('ExamplePassword');
-//var passwordValue = passwordElement.value;
+    //pare apo to to documment thn timi apo to elemenent me id=ExampleUsername
+    let username = document.getElementById('ExampleUsername').value;
+    let password = document.getElementById('ExamplePassword').value;
 
-//stelnw server ixix
-//send(server, usernameValue, passwordValue);
+    send(server,username,password)
 
-//mou epistrefei server sth selida
 
-// var DataLogin = {
-//  username : usernameValue ,
-// password : passwordValue
-//  }
 
-//  console.log(Datalogin)
-// axios.post('./login', DataLogin);
-
-//}
+}
