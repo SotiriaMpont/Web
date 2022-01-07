@@ -1,10 +1,19 @@
-function register() {
-    var elementInput = document.getElementById('username');
-    var passwordElement = document.getElementById("psw");
+async function register() {
+    let passwordElement = document.getElementById("psw");
+    let passwordRepeat = document.getElementById("psw-repeat")
     var capital = document.getElementById("capital");
     var number = document.getElementById("number");
     var length = document.getElementById("length");
     var symbols = document.getElementById("symbols");
+
+
+    let RegisterData = { 
+        password: passwordElement,
+        confirmpassword: passwordRepeat
+    }
+
+    let response = await axios.post('/', RegisterData)
+
 
    // When the user clicks on the password field, show the message box
     passwordElement.onfocus = function() {
@@ -63,4 +72,18 @@ function register() {
             }    
     }
 
+   
+// den douleuei akoma
+
+    if (passwordElement != passwordRepeat) {
+        alert("Passwords do not match.");
+        return false;
+    }
+    else 
+    {
+        return true;
+    }
+        
+
 }    
+
