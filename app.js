@@ -16,7 +16,7 @@ app.listen(8080, function() {
 
 app.use('/public', express.static(path.join(__dirname, "public")));
 app.use(express.json()); // tou lew oti ta  arxeia mou tha einai json (to body moy tha einai se morfh json)
-app.use(fileUpload());
+
 
 app.set('view engine', 'ejs');
 app.set('views', './views')
