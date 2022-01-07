@@ -68,3 +68,9 @@ app.post('/register', function(req, res) {
 app.get('/mainpage', function(req, res) {
     res.render('mainpage.ejs')
 })
+
+//admin page
+
+app.get('/admin', function(req, res) {
+    res.render('admin.ejs')
+})

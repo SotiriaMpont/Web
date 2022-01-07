@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+   
+
+    <title>Admin</title>
+</head>
+
+<body>
+    <h1>Admin</h1>
+
+    <div class="alert alert-info" role="alert" style="margin-left: 25%; margin-right: 25%;">
+        
+        <div class="mb-3">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" accept=".json" id="inputFiles">
+            </div>
+        </div>
+    </div>
+    <button onclick="uploadFile()"> Upload </button>
+
+
+    <canvas id="myChart" style="margin: auto;" width="1000"></canvas>
+</body>
+
+
+
+
+<script>
+    function uploadFile() {
+        var htmlElement = document.getElementById('inputFiles');
+        console.log(htmlElement.files[0]);
+        var file = htmlElement.files[0];
+
+        var myFiles = new FormData(); //edw 8a valoume ta arxeia mas;
+
+        myFiles.append('myFile', file)
+
+        axios.post('/sendpoifile', myFiles);
+
+
+    }
+</script>
+
+
+
