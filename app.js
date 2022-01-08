@@ -2,13 +2,15 @@ const express = require('express');
 var ejs = require('ejs');
 const app = express();
 
-const user = {
-    username: 'testuser',
-    password: 'passwrd'
 
+
+const user = {
+    username: 'Maria',
+    password: '1234'
+        //dokimastiko giati den exoume akoma bash, na dw an leitourgei to Submit button (an me ta stoixea auta me bgalei sto mainpage an pathsw Submit )
 }
 var path = require('path');
-var bodyParser = require('body-parser'); 
+var bodyParser = require('body-parser');
 
 app.listen(8080, function() {
     console.log("Server started on port 8080")
@@ -31,6 +33,7 @@ app.get('/', function(req, res) {
 })
 
 app.post('/', function(req, res) {
+
     console.log('douleuei logika !'); //mpompa to emfanizei
     console.log(req.body); // kai auto do3a TO THEO 
 
@@ -45,7 +48,7 @@ app.post('/', function(req, res) {
         res.send('success');
     } else {
         console.log('o server epistrefei Apotyxia!'); // den to emfanizei pros to paron 
-        res.send('fail'); 
+        res.send('fail');
     }
 
 })
@@ -60,6 +63,7 @@ app.get('/register', function(req, res) {
 app.post('/register', function(req, res) {
     console.log('Eimai ston register');
     console.log(req.body);
+
 })
 
 
@@ -69,8 +73,15 @@ app.get('/mainpage', function(req, res) {
     res.render('mainpage.ejs')
 })
 
-//admin page
 
+
+//admin
 app.get('/admin', function(req, res) {
-    res.render('admin.ejs')
+    res.render('admin.ejs');
+})
+
+app.post('/admin', function(req, res) {
+    console.log('Eimai ston admin');
+    console.log(req.body);
+
 })
