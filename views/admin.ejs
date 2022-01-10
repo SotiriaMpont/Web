@@ -8,6 +8,10 @@
 
     <meta charset="UTF-8">
     <title>Admin Page</title>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 
@@ -34,13 +38,17 @@
 
 <script>
     function uploadFile() {
+
         var htmlElement = document.getElementById('inputFiles');
         console.log(htmlElement.files[0]);
+
         var file = htmlElement.files[0];
-        var myFiles = new FormData(); //edw 8a valoume ta arxeia mas ?
+
+        var myFiles = new FormData(); 
         myFiles.append('myFile', file)
         axios.post('/sendpoifile', myFiles);
     }
+
 </script>
 
 

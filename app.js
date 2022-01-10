@@ -1,17 +1,23 @@
 const express = require('express');
 var ejs = require('ejs');
+var bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
+const mongoose = require('mongoose');
+
+
+
 const app = express();
-
-
+var bodyParser = require('body-parser');
 
 const user = {
     username: 'Maria',
     password: '1234'
         //dokimastiko giati den exoume akoma bash, na dw an leitourgei to Submit button (an me ta stoixea auta me bgalei sto mainpage an pathsw Submit )
 }
+
+const { Db } = require('mongodb'); 
 var path = require('path');
-var bodyParser = require('body-parser');
-const { Db } = require('mongodb');
+
 
 app.listen(8080, function() {
     console.log("Server started on port 8080")
@@ -19,10 +25,19 @@ app.listen(8080, function() {
 
 app.use('/public', express.static(path.join(__dirname, "public")));
 app.use(express.json()); // tou lew oti ta  arxeia mou tha einai json (to body moy tha einai se morfh json)
-
-
+app.use(fileUpload())
 app.set('view engine', 'ejs');
 app.set('views', './views')
+
+//sundesh me mongoose sthn bash
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/MyVisit', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose is connected!!!!');
+});
 
 
 // arxiki selida tou login 
@@ -86,3 +101,39 @@ app.post('/admin', function(req, res) {
     console.log(req.body);
 
 })
+
+/*
+//pairnw ta dedomena poy kanei upload o admin
+app.post('/sendpoifile', async function (req, res) {
+    // dexetai to arxeio json tou admin
+    
+    
+
+    
+    const file = req.files.myFiles;
+
+    // to diabazei gia na dei tis eggrafes sto susthma
+    const fileData = JSON.parse(file.data);
+
+    const myDesiredEggrafes = fileData.map(eggrafh => {
+        return {
+            id: eggrafh.id,
+            name: eggrafh.name,
+            types: eggrafh.types,
+            address: eggrafh.address,
+            coordinates: eggrafh.coordinates,
+            populartimes: eggrafh.populartimes,
+        }
+    })
+
+    console.log(myDesiredEggrafes);
+
+    
+
+
+    //prepei na perasoun oi eggrafes sthn vash
+
+
+    res.send();
+})
+*/
