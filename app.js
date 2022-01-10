@@ -102,15 +102,15 @@ app.post('/admin', function(req, res) {
 
 })
 
-/*
+//den douleuei akoma
 //pairnw ta dedomena poy kanei upload o admin
-app.post('/sendpoifile', async function (req, res) {
+app.post('/sendpoifile', async function (req, res){
     // dexetai to arxeio json tou admin
     
     
 
     
-    const file = req.files.myFiles;
+    const file = req.files.myFile;
 
     // to diabazei gia na dei tis eggrafes sto susthma
     const fileData = JSON.parse(file.data);
@@ -134,6 +134,5 @@ app.post('/sendpoifile', async function (req, res) {
     //prepei na perasoun oi eggrafes sthn vash
 
 
-    res.send();
-})
-*/
+}
+)
