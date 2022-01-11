@@ -3,17 +3,23 @@ body {
     max-width:400px
     
 }
-div.alert-info{
+.edit{
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #3dc1ca;
 
 }
-upload-button{
-    background-color: #4169e1;
+.changes{
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: linear-gradient(to right, rgba(255, 0, 0, 0));
+    height: 150hv;
+    overflow: hidden;
+}
+submit-button{
     color: black;
     padding: 14px 20px;
     margin: 8px 0;
