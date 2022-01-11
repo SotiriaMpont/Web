@@ -15,11 +15,11 @@ const user = {
         //dokimastiko giati den exoume akoma bash, na dw an leitourgei to Submit button (an me ta stoixea auta me bgalei sto mainpage an pathsw Submit )
 }
 
-const { Db } = require('mongodb'); 
+const { Db } = require('mongodb');
 var path = require('path');
 
 
-app.listen(80805, function() {
+app.listen(8080, function() {
     console.log("Server started on port 8080")
 });
 
@@ -28,6 +28,7 @@ app.use(express.json()); // tou lew oti ta  arxeia mou tha einai json (to body m
 app.use(fileUpload())
 app.set('view engine', 'ejs');
 app.set('views', './views')
+
 
 //sundesh me mongoose sthn bash
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/MyVisit', {
@@ -72,7 +73,6 @@ app.post('/', function(req, res) {
 //selida tou register 
 
 app.get('/register', function(req, res) {
-    console.log(req);
     res.render('register.ejs');
 })
 
@@ -80,6 +80,13 @@ app.post('/register', function(req, res) {
     console.log('Eimai ston register');
     console.log(req.body);
 
+    const RegisterUsernameClient = req.body.RegisterUsername;
+    const RegisterEmailClient = 'req.body.email@gmail.com';
+    const RegisterpasswordElement = req.body.passwordElement;
+    const RegisterRepeatPassword = req.body.passwordReapeat;
+
+    console.log('O Server kati epistrefei!')
+    res.send('success');
 })
 
 
@@ -104,12 +111,12 @@ app.post('/admin', function(req, res) {
 
 //den douleuei akoma
 //pairnw ta dedomena poy kanei upload o admin
-app.post('/sendpoifile', async function (req, res){
+app.post('/sendpoifile', async function(req, res) {
     // dexetai to arxeio json tou admin
-    
-    
 
-    
+
+
+
     const file = req.files.myFile;
 
     // to diabazei gia na dei tis eggrafes sto susthma
@@ -128,11 +135,10 @@ app.post('/sendpoifile', async function (req, res){
 
     console.log(myDesiredEggrafes);
 
-    
+
 
 
     //prepei na perasoun oi eggrafes sthn vash
 
 
-}
-)
+})
