@@ -8,7 +8,9 @@
     "fs": "^0.0.1-security",
     "mongodb": "^4.3.0",
     "mongoose": "^6.1.5",
-    "mysql2": "^2.3.3",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.15"
   }
 }
