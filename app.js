@@ -96,6 +96,10 @@ app.get('/mainpage', function(req, res) {
     res.render('mainpage.ejs')
 })
 
+//allagh stoixeiwn xrhsth
+app.get('/mainpage/profile_change', function(req, res) {
+    res.render('profile_change.ejs')
+})
 
 
 //admin
@@ -141,4 +145,5 @@ app.post('/sendpoifile', async function(req, res) {
     //prepei na perasoun oi eggrafes sthn vash
 
 
-})
+}
+)
