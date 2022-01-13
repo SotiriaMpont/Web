@@ -6,8 +6,8 @@
     "express-fileupload": "^1.2.1",
     "file": "^0.2.2",
     "fs": "^0.0.1-security",
+    "mongoose": "^6.1.6",
     "nodeman": "^1.1.2",
-    "nodemon": "^2.0.15",
-    "mongoose":"6.1.6"
+    "nodemon": "^2.0.15"
   }
 }
