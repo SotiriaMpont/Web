@@ -1,11 +1,20 @@
 const fileUpload = require('express-fileupload');
 const express = require("express");
+var bodyParser = require('body-parser')
 const db = require("./models/index");
 const path = require("path");
 const dbConfig = require("./config/db.config");
-const PoiController = require("./controllers/PoiController");
+const authConfig = require("./config/auth.config");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+const AuthController = require("./controllers/AuthController");
 
 const app = express();
+
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+}));
 
 db.mongoose
     .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
@@ -20,56 +29,73 @@ db.mongoose
         process.exit();
     });
 
-app.listen(8080, function () {
-    console.log("Server started on port 8080")
-});
+const start = (port) => {
+    try {
+        app.listen(port, () => {
+            console.log(`Api up and running at: http://localhost:${port}`);
+        });
+    } catch (error) {
+        console.error(error);
+        process.exit();
+    }
+};
+start(8080);
 
+app.use(cookieParser());
 app.use('/public', express.static(path.join(__dirname, "public")));
 app.use(express.json()); // tou lew oti ta  arxeia mou tha einai json (to body moy tha einai se morfh json)
 app.use(fileUpload())
 app.set('view engine', 'ejs');
 app.set('views', './views')
 
+const authorization = (req, res, next) => {
+    const token = req.cookies.access_token;
+    if (!token) {
+        return res.sendStatus(403);
+    }
+    try {
+        const data = jwt.verify(token, authConfig.secret);
+        req.userId = data.id;
+        //req.userRole = data.role;
+        return next();
+    } catch (ex) {
+        console.log(ex)
+        return res.sendStatus(403);
+    }
+};
+
 // arxiki selida tou login 
+app.get('/login', function (req, res) {
+    res.render('login.ejs')
+})
+
 app.get('/', function (req, res) {
     res.render('login.ejs')
 })
-app.post('/', new PoiController().findbyid);
-// function (req, res) {
-//     
-//     const username = req.body.username;
-//     UserModel.findOne({
-//         username: username
-//     })
-//         //.populate('roles')
-//         .exec()
-//         .then(user => console.log(user))
-//         .catch(err => console.log(err));
-//     res.send('fail');
+app.get("/logout", authorization, (req, res) => {
+    const authController = new AuthController();
+    return authController.SignOut(res);
+});
 
-//     // if (usernameClient == user.username && passwordClient == user.password) {
-//     //     console.log('o server epistrefei Epityxia!'); // den emfanizei akoma!!!!
-//     //     res.send('success');
-//     // } else {
-//     //     console.log('o server epistrefei Apotyxia!'); // den to emfanizei pros to paron 
-//     //     res.send('fail');
-//     // }
-// })
-
+app.post('/login', async (req, res) => {
+    const authController = new AuthController();
+    return await authController.SignInAsync(req, res);
+});
 //selida tou register 
 
 app.get('/register', function (req, res) {
-    console.log(req);
     res.render('register.ejs');
 })
 
-//mainpage
-
-app.get('/mainpage', function (req, res) {
-    res.render('mainpage.ejs')
+app.post('/register', async (req, res) => {
+    const authController = new AuthController();
+    return await authController.SignUpAsync(req, res);
 })
 
-
+//mainpage
+app.get('/mainpage', authorization, function (req, res) {
+    res.render('mainpage.ejs')
+})
 
 //admin
 app.get('/admin', function (req, res) {

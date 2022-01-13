@@ -1,6 +1,6 @@
 const db = require("../models/index");
 
-class Repository {
+class PoiRepository {
     async findbyid(id) {
         const PoiModel = db.poi;
         return await PoiModel.findOne({
@@ -9,4 +9,4 @@ class Repository {
     }
 }
 
-module.exports = Repository;
+module.exports = PoiRepository;

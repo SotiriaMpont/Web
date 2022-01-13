@@ -1,59 +1,48 @@
-const db = require("../models/index");
+const UserService = require("../Service/UserService");
 
-const UserModel = db.user;
 
-exports.signin = (req, res) => {
+class AuthController {
+    #UserService = new UserService();
 
-    const username = req.body.username;
-    UserModel.findOne({
-        username: username
-    })
-        //.populate('roles')
-        .exec()
-        .then(user => console.log(user))
-        .catch(err => console.log(err));
-    res.send('success');
-    // User.findOne({
-    //     username: req.body.username
-    // })
-    //     .populate("roles", "-__v")
-    //     .exec((err, user) => {
-    //         if (err) {
-    //             res.status(500).send({ message: err });
-    //             return;
-    //         }
+    async SignInAsync(req, res) {
+        const username = req.body.username;
+        const password = req.body.password;
 
-    //         if (!user) {
-    //             return res.status(404).send({ message: "User Not found." });
-    //         }
+        const result = await this.#UserService.SignInAsync(username, password);
 
-    //         var passwordIsValid = bcrypt.compareSync(
-    //             req.body.password,
-    //             user.password
-    //         );
+        if (!result
+            || !result.success) {
+            return res.status(404).send({ message: "User Not found." });
+        }
+        res
+            .cookie("access_token", result.accessToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+            })
+            .redirect('/mainpage');
+    }
 
-    //         if (!passwordIsValid) {
-    //             return res.status(401).send({
-    //                 accessToken: null,
-    //                 message: "Invalid Password!"
-    //             });
-    //         }
+    async SignUpAsync(req, res) {
+        const user = {
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email,
+        }
 
-    //         var token = jwt.sign({ id: user.id }, config.secret, {
-    //             expiresIn: 86400 // 24 hours
-    //         });
+        const success = await this.#UserService.SignUpAsync(user);
 
-    //         var authorities = [];
+        if (!success)
+            return res.status(404).send({ message: "User Not found." });
 
-    //         for (let i = 0; i < user.roles.length; i++) {
-    //             authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
-    //         }
-    //         res.status(200).send({
-    //             id: user._id,
-    //             username: user.username,
-    //             email: user.email,
-    //             roles: authorities,
-    //             accessToken: token
-    //         });
-    //     });
-};
+        res
+            .redirect('/login');
+    }
+
+
+    async SignOut(res) {
+        res
+            .clearCookie("access_token")
+            .redirect('/login');
+    }
+}
+module.exports = AuthController;

@@ -1,7 +1,7 @@
-const Repository = require("../Infastracture/Repository");
+const PoiRepository = require("../Infastracture/PoiRepository");
 
 class PoiService {
-    #repo = new Repository();
+    #repo = new PoiRepository();
 
     async findbyid(id) {
         return await this.#repo.findbyid(id);
