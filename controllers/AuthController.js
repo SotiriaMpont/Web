@@ -1,6 +1,5 @@
 const UserService = require("../Service/UserService");
 
-
 class AuthController {
     #UserService = new UserService();
 
@@ -27,6 +26,8 @@ class AuthController {
             username: req.body.username,
             password: req.body.password,
             email: req.body.email,
+            psw_repeat: req.body.psw_repeat,
+            roles: ["moderator"]
         }
 
         const success = await this.#UserService.SignUpAsync(user);
@@ -37,7 +38,6 @@ class AuthController {
         res
             .redirect('/login');
     }
-
 
     async SignOut(res) {
         res

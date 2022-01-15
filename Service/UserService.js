@@ -1,6 +1,9 @@
 const UserRepository = require("../Infastracture/UserRepositroy");
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config");
+const User = require("../models/user.model");
+const req = require("express/lib/request");
+const bcrypt = require("bcryptjs");
 
 class UserService {
     #repo = new UserRepository();
@@ -9,17 +12,22 @@ class UserService {
         const user = await this.#repo.FindbyUserName(username);
 
         if (user
-            && user.password === password) {
-            //generate jwt for auth
-            const token = jwt.sign({ id: user.id }, config.secret, {
-                expiresIn: 3600
+            && bcrypt.compareSync(
+                password,
+                user.password
+              )) {
+            //generate jwt for user
+            const token = jwt.sign({
+                id: user.id,
+                roles: user.roles,
+                email: user.email,
+                username: user.username
+            },
+                config.secret, {
+                expiresIn: 3600 //active for 1 hour
             });
             return {
                 success: true,
-                id: user._id,
-                username: user.username,
-                email: user.email,
-                //roles: authorities,
                 accessToken: token
             };
         }
@@ -29,7 +37,8 @@ class UserService {
     }
 
     async SignUpAsync(user) {
-        console.log(await this.#repo.IsUserExists(user.username))
+        user.password = bcrypt.hashSync(user.password, 8); //hash password for extra security 
+
         if (!user
             || await this.#repo.IsUserExists(user.username)) {
             return false;

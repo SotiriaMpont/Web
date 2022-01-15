@@ -1,29 +1,38 @@
-const { authJwt } = require("../middlewares");
-const controller = require("../controllers/AuthController");
+const authorization = require("../middlewares/authorization");
+const AuthController = require("../controllers/AuthController");
 
 module.exports = function (app) {
-    app.use(function (req, res, next) {
-        res.header(
-            "Access-Control-Allow-Headers",
-            "x-access-token, Origin, Content-Type, Accept"
-        );
-        next();
+    // arxiki selida tou login 
+    app.get('/login', function (req, res) {
+        res.render('login.ejs')
     });
 
-    app.post('/', new PoiController().findbyid);
-    // app.get("/api/test/all", controller.allAccess);
+    app.get('/', function (req, res) {
+        res.render('login.ejs')
+    });
+    
+    app.get("/logout", authorization, (req, res) => {
+        const authController = new AuthController();
+        return authController.SignOut(res);
+    });
 
-    // app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
+    app.post('/login', async (req, res) => {
+        const authController = new AuthController();
+        return await authController.SignInAsync(req, res);
+    });
+    //selida tou register 
 
-    // app.get(
-    //     "/api/test/mod",
-    //     [authJwt.verifyToken, authJwt.isModerator],
-    //     controller.moderatorBoard
-    // );
+    app.get('/register', function (req, res) {
+        res.render('register.ejs');
+    })
 
-    // app.get(
-    //     "/api/test/admin",
-    //     [authJwt.verifyToken, authJwt.isAdmin],
-    //     controller.adminBoard
-    // );
+    app.post('/register',
+        async (req, res) => {
+            // const errors = validationResult(req);
+            // if (!errors.isEmpty()) {
+            //     return res.status(400).json({ errors: errors.array() });
+            // }
+            const authController = new AuthController();
+            return await authController.SignUpAsync(req, res);
+        })
 };

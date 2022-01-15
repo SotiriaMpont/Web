@@ -4,14 +4,13 @@ const User = mongoose.model(
   'User',
   {
     username: { type: String },
-    password: { type: String }
+    password: { type: String },
+    roles: [
+      {
+        type: String
+      }
+    ]
   }
-  // roles: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "Role"
-  //   }
-  // ]
   , 'User'
 );
 
