@@ -11,3 +11,16 @@ function SubmitClicked() { // Otan pataw to submit sto login
 
 
 }
+
+
+
+
+function register() {
+
+    var passwordElement = document.getElementById("psw").value;
+    var passwordRepeat = document.getElementById("psw-repeat").value;
+    var email = document.getElementById("email").value;
+    var RegisterUsername = document.getElementById("username").value;
+
+    send(server, passwordElement, passwordRepeat, email, RegisterUsername)
+}
