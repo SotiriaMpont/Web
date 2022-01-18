@@ -10,7 +10,7 @@ module.exports = function (app) {
     app.get('/', function (req, res) {
         res.render('login.ejs')
     });
-    
+
     app.get("/logout", authorization, (req, res) => {
         const authController = new AuthController();
         return authController.SignOut(res);
@@ -34,5 +34,13 @@ module.exports = function (app) {
             // }
             const authController = new AuthController();
             return await authController.SignUpAsync(req, res);
-        })
+        });
+
+    //allagh stoixeiwn xrhsth
+    app.get('/profile_change', function (req, res) {
+        res.render('profile_change.ejs')
+    });
+    app.post('/profile_change', function (req, res) {
+        res.render('profile_change.ejs')
+    });
 };
