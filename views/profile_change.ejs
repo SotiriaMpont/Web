@@ -21,24 +21,46 @@
 
 <body>
     <h1>Edit your profile </h1>
-    <form action="" method="post">
-        <div class="edit">
-            <div class="changes">
-                <label for="username"><b>New Username</b></label>
-                <input type="text" placeholder="Enter New Username" name="username" id="username" required>
+    <div class="container">
+        <form action="/mainpage" method="post">
+                
+            <label for="username"><b>New Username</b></label>
+            <input type="text" placeholder="Enter New Username" name="username" id="username" required>
 
-                <label for="psw"><b>New Password</b></label>
-                <input type="password" placeholder="Enter new Password" name="psw" id="psw"
-                    pattern="(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}"
-                    title="Must contain at least one number, one uppercase letter,a symbol(eg #$*&@) and at least 8 or more characters"
-                    required>
+            <label for="psw"><b> New Password</b></label>
+            <input type="password" placeholder="Enter new Password"  id="password"
+                pattern="(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}"
+                title="Must contain at least one number, one uppercase letter,a symbol(eg #$*&@) and at least 8 or more characters"
+                required>
 
-                <label for="psw-repeat"><b>Repeat new Password</b></label>
-                <input type="password" placeholder="Repeat new Password" name="psw-repeat" id="psw-repeat" required>
-                <hr>
-            </div>
-
-        </div>
-        <button type="submit" id="submit-button"> Submit </button>
-    </form>
+            <label for="psw-repeat"><b> Repeat new Password</b></label>
+            <input type="password" placeholder="Repeat new Password"  id="password-repeat" required>
+                
+                
+            <button type="submit" id="submit_btn"> Submit </button>
+        </form>
+    </div>
 </body>
+
+<script>
+    let passwordElement = document.getElementById("password");
+    let passwordRepeat = document.getElementById("password-repeat")
+
+    //check if passwords match
+    function validatePassword(){
+        if(passwordElement.value != passwordRepeat.value) {
+            passwordRepeat.setCustomValidity("Passwords Don't Match");
+        } else {
+            passwordRepeat.setCustomValidity('');
+        }
+    }
+
+    passwordElement.onchange = validatePassword;
+    passwordRepeat.onkeyup = validatePassword;
+
+
+</script>
+
+
+
+</html>

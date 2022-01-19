@@ -3,15 +3,16 @@ body {
     max-width:400px
     
 }
-.edit{
+input {
     width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-
-}
-.changes{
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+  }
+.container{
     margin: 0;
     padding: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -19,7 +20,8 @@ body {
     height: 150hv;
     overflow: hidden;
 }
-submit-button{
+#submit_btn{
+    background-color: #4169e1;
     color: black;
     padding: 14px 20px;
     margin: 8px 0;
