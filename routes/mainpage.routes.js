@@ -18,7 +18,7 @@ module.exports = function (app) {
         console.log(req.body);
     });
 
-    //den douleuei akoma
+    
     //pairnw ta dedomena poy kanei upload o admin
     app.post('/sendpoifile', async function (req, res) {
         // dexetai to arxeio json tou admin

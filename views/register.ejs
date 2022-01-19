@@ -39,7 +39,7 @@
             <hr>
 
             <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-            <button type="submit" onclick=" register()" action="/endpoint" method="POST" class="registerbtn">Register</button>
+            <button type="submit" onclick="register" action="/endpoint" method="POST" class="registerbtn">Register</button>
         </div>
 
         <div class="container signin">
@@ -59,12 +59,92 @@
 
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="./register_functions.js">
+<script>
+    
+    let passwordElement = document.getElementById("psw");
+    let passwordRepeat = document.getElementById("psw-repeat")
+    var capital = document.getElementById("capital");
+    var number = document.getElementById("number");
+    var length = document.getElementById("length");
+    var symbols = document.getElementById("symbols");
+
+
+    
+
+
+    // When the user clicks on the password field, show the message box
+    passwordElement.onfocus = function() {
+        document.getElementById("message").style.display = "block";
+    }
+    
+    // When the user clicks outside of the password field, hide the message box
+    passwordElement.onblur = function() {
+        document.getElementById("message").style.display = "none";
+        }
+    // When the user starts to type something inside the password field
+    passwordElement.onkeyup = function() {
+        // Validate capital letters
+        var upperCaseLetters = /[A-Z]/g;
+        if(passwordElement.value.match(upperCaseLetters)) {
+            capital.classList.remove("invalid");
+            capital.classList.add("valid");
+        } 
+        else {
+            capital.classList.remove("valid");
+            capital.classList.add("invalid");
+        }
+            
+        // Validate numbers
+        var numbers = /[0-9]/g;
+        if(passwordElement.value.match(numbers)) {
+            number.classList.remove("invalid");
+            number.classList.add("valid");
+        }   
+        else {
+            number.classList.remove("valid");
+            number.classList.add("invalid");
+        }
+
+        // Validate length
+        if(passwordElement.value.length >= 8) {
+            length.classList.remove("invalid");
+            length.classList.add("valid");
+        } 
+        else {
+            length.classList.remove("valid");
+            length.classList.add("invalid");
+        }
+        
+        // For symbols (non-word characters)
+
+        var symbols = /[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]/;   
+        if(passwordElement.value.match(symbols)) {
+            symbols.classList.remove("invalid");
+            symbols.classList.add("valid");
+        }
+        else {
+            symbols.classList.remove("valid");
+            symbols.classList.add("invalid");
+        }    
+    }
+
+async function register() { 
+    //elegxos password
+
+    if (passwordElement != passwordRepeat) {
+        alert("Passwords do not match.");
+        return false;
+    }
+    else 
+    {
+        return true;
+    }
+            
+
+}    
+
 </script>
+
 
 
 </html>
