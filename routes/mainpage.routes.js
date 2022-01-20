@@ -51,7 +51,7 @@ module.exports = function(app) {
     })
 
 
-    app.post('/Datasent', function(res, req) {
+     app.post('/Datasent', function(res, req) {
 
         const userSearchFor = req.body.InputData
             // prepei na psaxeis shtn vash na vreis poies topo8esies exoun type auto pou egrapse o xristis
@@ -62,7 +62,7 @@ module.exports = function(app) {
 
             while (myCursor.hasNext()) { // sarwnw thn lista 
 
-                const DatabaseResults = myCursor; // δημιουργω μια μεταβλητη DatabaseResults οπου θα παιρνει τις τιμες του cursora!
+                DatabaseResults =Poi.insertMany([{type:food}]) //sthn metavliti DtabaseResults βαζω ολα τα μοντελα με type food
 
             }
 
@@ -73,4 +73,5 @@ module.exports = function(app) {
 
 
     })
+};
 };
