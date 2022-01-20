@@ -30,8 +30,8 @@
     <h1 style="color:black" style="margin:auto;max-width:400px"> Welcome !</h1>
 
     <div class="Search_mainpage" style="margin:auto;max-width:300px">
-        <input type="text" placeholder="Search.." name="search2">
-        <button type="submit"><i class="fa fa-search"></i></button>
+        <input type="text" placeholder="Search.." name="search2" id='search2'>
+        <button type="submit" onclick='Search_mainpage()'><i class="fa fa-search"></i></button>
     </div>
 
     <div style="height: 400px; width: 40%;" id="mapid"></div>
@@ -47,7 +47,6 @@
 
 <script>
     // to documenation gia tous xartes einai edw:  https://leafletjs.com/examples/quick-start/
-
     var layer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -57,68 +56,60 @@
         accessToken: 'pk.eyJ1IjoibGZrc2pmZGtsc2pmbGtzZGpmbGtzZGZqbGsiLCJhIjoiY2twZHZ2emJyMXJpOTJubnhoNXE3dGF5MiJ9.tFk1NMKkfjT7F-0OJ4Z-Sw'
             // get access from here :https://api.mapbox.com
     })
-
-
     var map = L.map('mapid', {
         selectedArea: true,
         center: [38.245865, 21.732860],
         zoom: 13,
         layers: [layer]
-
     })
 
-    async function bringeMeMarkersLocations() {
-        const resp = await axios.get('/poi-locations');
-
-        console.log(resp);
-        resp.data.map(niosto_stoixio => {
-            var userMarket = L.marker([niosto_stoixio.coordinates.x, niosto_stoixio.coordinates.y]);
-            userMarket.addTo(map)
-        })
-    }
-
-    bringeMeMarkersLocations()
-
-
     var userMarket = L.marker([37.968202, 21.732860]);
-
     userMarket.addTo(map)
-
-
-
     getLocation(map);
 
     function getLocation(map) {
-
-
-
         function success(details) {
             //lat
             console.log("Test");
             var lat = details.coords.latitude;
             var lon = details.coords.longitude
-
             console.log(details.coords.latitude, details.coords.longitude);
             L.marker([lat, lon]).addTo(map);
             map.flyTo([lat, lon]);
-
         }
 
         function error(error) {
             console.log(error);
         }
-
         var options = {
             timeout: 100000,
             maximumAge: 0,
+        }
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }
+    // pos na kentraro ton xristi otan sunde8ei : https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjGuI-Z7tv0AhV3iv0HHcn0B4kQFnoECAcQAQ&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fel%2Fdocs%2FWeb%2FAPI%2FGeolocation%2FgetCurrentPosition&usg=AOvVaw2321yRy6Qaug2Mh_37kZtf
 
+
+    async function Search_mainpage() {
+        let eisodos = document.getElementById('search2').value; //to psareuw
+        //let resp= await axaios.get('/DataSent')
+        // console.log(resp.data);
+
+        let a = {
+            InputData: eisodos
         }
 
-        navigator.geolocation.getCurrentPosition(success, error, options);
+        console.log(a.InputData);
+        //shmantiko bhma
+        const ServerResponse = await axios.post('/Datasent', a)
+        console.log(serverResponse.data);
 
+        //λογικα με αυτ θα εμφανιζει τους markers!
+        serverResponse.data.map(poi => {
+
+            let current_marker = L.marker([poi.cordinates.lat, poi.cordinates.lng]).addTo(map);
+        })
     }
-
-    // pos na kentraro ton xristi otan sunde8ei : https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjGuI-Z7tv0AhV3iv0HHcn0B4kQFnoECAcQAQ&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fel%2Fdocs%2FWeb%2FAPI%2FGeolocation%2FgetCurrentPosition&usg=AOvVaw2321yRy6Qaug2Mh_37kZtf
 </script>
 
 </html>
