@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const authConfig = require("../config/auth.config");
 
+
 const CheckModeratorRole = (req, res, next) => {
     const token = req.cookies.access_token;
     if (!token) {
@@ -13,5 +14,6 @@ const CheckModeratorRole = (req, res, next) => {
     } catch { }
     return res.sendStatus(403);
 };
+
 
 module.exports = CheckModeratorRole;

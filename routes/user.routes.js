@@ -1,6 +1,7 @@
 const authorization = require("../middlewares/authorization");
 const AuthController = require("../controllers/AuthController");
 
+
 module.exports = function (app) {
     // arxiki selida tou login 
     app.get('/login', function (req, res) {
@@ -26,15 +27,17 @@ module.exports = function (app) {
         res.render('register.ejs');
     })
 
-    app.post('/register',
-        async (req, res) => {
+    app.post('/register', async (req, res) => {
             // const errors = validationResult(req);
             // if (!errors.isEmpty()) {
             //     return res.status(400).json({ errors: errors.array() });
             // }
             const authController = new AuthController();
             return await authController.SignUpAsync(req, res);
-        });
+           
+    });
+    
+
 
     //allagh stoixeiwn xrhsth
     app.get('/profile_change', function (req, res) {

@@ -4,10 +4,11 @@ class AuthController {
     #UserService = new UserService();
 
     async SignInAsync(req, res) {
+        const email = req.body.email;
         const username = req.body.username;
         const password = req.body.password;
 
-        const result = await this.#UserService.SignInAsync(username, password);
+        const result = await this.#UserService.SignInAsync(email, username, password);
 
         if (!result
             || !result.success) {
@@ -23,9 +24,9 @@ class AuthController {
 
     async SignUpAsync(req, res) {
         const user = {
+            email: req.body.email,
             username: req.body.username,
             password: req.body.password,
-            email: req.body.email,
             psw_repeat: req.body.psw_repeat,
             roles: ["moderator"]
         }
