@@ -56,14 +56,17 @@ module.exports = function(app) {
         const userSearchFor = req.body.InputData
             // prepei na psaxeis shtn vash na vreis poies topo8esies exoun type auto pou egrapse o xristis
 
-        for (var i = 0; i < Positions.length; i++) { // elegxw gia  kathe stoixeio toy collection position
+        if (userSearchFor == 'food') // δηλαδη αν ο χρηστης εγραψε στο checkbox του mainpage food
+        {
+            myCursor = db.Positions.find({ types: 'food' }) // select * from Positions where type==food 
 
-            if (userSearchFor == 'food') { // an auto pou egrapse o xristis einai iso me 
+            while (myCursor.hasNext()) { // sarwnw thn lista 
 
-                const ArrayOfResults = poi.find({ type: 'food' })
+                const DatabaseResults = myCursor; // δημιουργω μια μεταβλητη DatabaseResults οπου θα παιρνει τις τιμες του cursora!
+
             }
 
-            res.send(ArrayofResults)
+            res.send(DatabaseResults); // και ζηταω απο τον σερβερ να μου επιστρεψει αυτη τη λιστα, την DatabaseResults!
         }
 
 
