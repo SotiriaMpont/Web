@@ -1,26 +1,27 @@
 const authorization = require("../middlewares/authorization");
-const CheckModeratorRole = require("../middlewares/CheckModeratorRole")
+const CheckModeratorRole = require("../middlewares/CheckModeratorRole");
+const Poi = require("../models/poi.model");
 
-module.exports = function (app) {
+module.exports = function(app) {
 
     //mainpage
-    app.get('/mainpage', [authorization, CheckModeratorRole], function (req, res) {
+    app.get('/mainpage', [authorization, CheckModeratorRole], function(req, res) {
         res.render('mainpage.ejs')
     });
 
     //admin
-    app.get('/admin', function (req, res) {
+    app.get('/admin', function(req, res) {
         res.render('admin.ejs');
     });
 
-    app.post('/admin', function (req, res) {
+    app.post('/admin', function(req, res) {
         console.log('Eimai ston admin');
         console.log(req.body);
     });
 
-    
+
     //pairnw ta dedomena poy kanei upload o admin
-    app.post('/sendpoifile', async function (req, res) {
+    app.post('/sendpoifile', async function(req, res) {
         // dexetai to arxeio json tou admin
 
         const file = req.files.myFile;
@@ -42,5 +43,31 @@ module.exports = function (app) {
         console.log(myDesiredEggrafes);
 
         //prepei na perasoun oi eggrafes sthn vash
+    })
+
+
+    app.get('/Datasent', function(req, res) {
+
+    })
+
+
+    app.post('/Datasent', function(res, req) {
+
+        const userSearchFor = req.body.InputData
+            // prepei na psaxeis shtn vash na vreis poies topo8esies exoun type auto pou egrapse o xristis
+
+        for (var i = 0; i < Positions.length; i++) { // elegxw gia  kathe stoixeio toy collection position
+
+            if (userSearchFor == 'food') { // an auto pou egrapse o xristis einai iso me 
+
+                const ArrayOfResults = poi.find({ type: 'food' })
+            }
+
+            res.send(ArrayofResults)
+        }
+
+
+
+
     })
 };
