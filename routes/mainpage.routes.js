@@ -8,6 +8,8 @@ module.exports = function(app) {
     app.get('/mainpage', [authorization, CheckModeratorRole], function(req, res) {
         res.render('mainpage.ejs')
     });
+    
+    
 
     //admin
     app.get('/admin', function(req, res) {

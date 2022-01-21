@@ -36,8 +36,6 @@ module.exports = function (app) {
             return await authController.SignUpAsync(req, res);
            
     });
-    
-
 
     //allagh stoixeiwn xrhsth
     app.get('/profile_change', function (req, res) {
@@ -46,4 +44,8 @@ module.exports = function (app) {
     app.post('/profile_change', function (req, res) {
         res.render('profile_change.ejs')
     });
+    
+
+
+    
 };
