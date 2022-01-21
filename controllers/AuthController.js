@@ -37,6 +37,10 @@ class AuthController {
             return res.status(404).send({ message: "User already exists." });
         else if (success == "Error2")
             return res.status(404).send({ message: "Email already exists." });
+        else if (success == "Error3")
+            return res.status(404).send({ message: "Passwords don't match." });
+        else if (success == "Error4")
+            return res.status(404).send({ message: "Password has unvalid form." });
         else {
             res   
                 .redirect('/login');

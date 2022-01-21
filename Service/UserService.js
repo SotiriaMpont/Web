@@ -38,14 +38,18 @@ class UserService {
 
     async SignUpAsync(user) {
         let result
-        user.password = bcrypt.hashSync(user.password, 8); //hash password for extra security 
-
-        if (!user || !user.username || await this.#repo.IsUserExists(user.username)) {
-            result = 'Error1';
-        }else if (!user.email || await this.#repo.emailAlreadyExists(user.email)) {
-            result = 'Error2';
         
+
+        if (await this.#repo.IsUserExists(user.username)) {
+            result = 'Error1';
+        }else if (await this.#repo.emailAlreadyExists(user.email)) {
+            result = 'Error2';
+        }else if (user.password != user.psw_repeat) {
+            result = 'Error3';
+        }else if (user.password = "^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}$") {
+            result = 'Error4';
         }else{
+            user.password = bcrypt.hashSync(user.password); //hash password for extra security 
             const s = await this.#repo.AddAsync(user);
         }
 
