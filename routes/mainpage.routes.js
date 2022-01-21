@@ -48,32 +48,8 @@ module.exports = function(app) {
     })
 
 
-    app.get('/Datasent', function(req, res) {
-
-    })
+    
 
 
-     app.post('/Datasent', function(res, req) {
-
-        const userSearchFor = req.body.InputData
-            // prepei na psaxeis shtn vash na vreis poies topo8esies exoun type auto pou egrapse o xristis
-
-        if (userSearchFor == 'food') // δηλαδη αν ο χρηστης εγραψε στο checkbox του mainpage food
-        {
-            myCursor = db.Positions.find({ types: 'food' }) // select * from Positions where type==food 
-
-            while (myCursor.hasNext()) { // sarwnw thn lista 
-
-                DatabaseResults =Poi.insertMany([{type:food}]) //sthn metavliti DtabaseResults βαζω ολα τα μοντελα με type food
-
-            }
-
-            res.send(DatabaseResults); // και ζηταω απο τον σερβερ να μου επιστρεψει αυτη τη λιστα, την DatabaseResults!
-        }
-
-
-
-
-    })
 };
 
