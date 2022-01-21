@@ -37,15 +37,23 @@ class UserService {
     }
 
     async SignUpAsync(user) {
+        let result
         user.password = bcrypt.hashSync(user.password, 8); //hash password for extra security 
 
-        if (!user
-            || await this.#repo.IsUserExists(user.username)) {
-            return false;
+        if (!user || !user.username || await this.#repo.IsUserExists(user.username)) {
+            result = 'Error1';
+        }else if (!user.email || await this.#repo.emailAlreadyExists(user.email)) {
+            result = 'Error2';
+        
+        }else{
+            const s = await this.#repo.AddAsync(user);
         }
-        const s = await this.#repo.AddAsync(user);
-        return true;
+
+       
+        return result;
     }
+
+
 
 }
 module.exports = UserService;

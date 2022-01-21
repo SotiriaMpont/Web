@@ -16,6 +16,14 @@ class UserRepository {
             username: username
         });
     }
+    async emailAlreadyExists(email) {
+        const UserModel = db.user;
+
+        return await UserModel.exists({
+            email: email
+        });
+    }
+    
 
     async AddAsync(user) {
         const UserModel = db.user;

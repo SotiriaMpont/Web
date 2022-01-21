@@ -33,11 +33,14 @@ class AuthController {
 
         const success = await this.#UserService.SignUpAsync(user);
 
-        if (!success)
-            return res.status(404).send({ message: "User Not found." });
-
-        res
-            .redirect('/login');
+        if (success == "Error1")
+            return res.status(404).send({ message: "User already exists." });
+        else if (success == "Error2")
+            return res.status(404).send({ message: "Email already exists." });
+        else {
+            res   
+                .redirect('/login');
+        }
     }
 
     async SignOut(res) {
