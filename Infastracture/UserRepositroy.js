@@ -1,26 +1,27 @@
 const db = require("../models/index");
 
 class UserRepository {
-    async FindbyUserName(username) {
-        const UserModel = db.user;
+  //euresh xrhsth me to onoma tou
+  async FindbyUserName(username) {
+    const UserModel = db.user;
 
-        return await UserModel.findOne({
-            username: username
-        }).exec();
-    }
+    return await UserModel.findOne({
+      username: username,
+    }).exec();
+  }
+  //elegxosgia ton o xrhsths yparxei
+  async IsUserExists(username) {
+    const UserModel = db.user;
 
-    async IsUserExists(username) {
-        const UserModel = db.user;
-
-        return await UserModel.exists({
-            username: username
-        });
-    }
-
-    async AddAsync(user) {
-        const UserModel = db.user;
-        return await UserModel.create(user);
-    }
+    return await UserModel.exists({
+      username: username,
+    });
+  }
+  //shmiourgia kainourioy xrhsth
+  async AddAsync(user) {
+    const UserModel = db.user;
+    return await UserModel.create(user);
+  }
 }
 
 module.exports = UserRepository;

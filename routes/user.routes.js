@@ -2,45 +2,44 @@ const authorization = require("../middlewares/authorization");
 const AuthController = require("../controllers/AuthController");
 
 module.exports = function (app) {
-    // arxiki selida tou login 
-    app.get('/login', function (req, res) {
-        res.render('login.ejs')
-    });
+  const authController = new AuthController();
 
-    app.get('/', function (req, res) {
-        res.render('login.ejs')
-    });
+  // arxiki selida tou login
+  app.get("/login", function (req, res) {
+    res.render("login.ejs");
+  });
 
-    app.get("/logout", authorization, (req, res) => {
-        const authController = new AuthController();
-        return authController.SignOut(res);
-    });
+  app.get("/", function (req, res) {
+    res.render("login.ejs");
+  });
 
-    app.post('/login', async (req, res) => {
-        const authController = new AuthController();
-        return await authController.SignInAsync(req, res);
-    });
-    //selida tou register 
+  app.get("/logout", authorization, (req, res) => {
+    return authController.SignOut(req, res);
+  });
 
-    app.get('/register', function (req, res) {
-        res.render('register.ejs');
-    })
+  app.post("/login", async (req, res) => {
+    return await authController.SignInAsync(req, res);
+  });
 
-    app.post('/register',
-        async (req, res) => {
-            // const errors = validationResult(req);
-            // if (!errors.isEmpty()) {
-            //     return res.status(400).json({ errors: errors.array() });
-            // }
-            const authController = new AuthController();
-            return await authController.SignUpAsync(req, res);
-        });
+  //selida tou register
 
-    //allagh stoixeiwn xrhsth
-    app.get('/profile_change', function (req, res) {
-        res.render('profile_change.ejs')
-    });
-    app.post('/profile_change', function (req, res) {
-        res.render('profile_change.ejs')
-    });
+  app.get("/register", function (req, res) {
+    res.render("register.ejs");
+  });
+
+  app.post("/register", async (req, res) => {
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     return res.status(400).json({ errors: errors.array() });
+    // }
+    return await authController.SignUpAsync(req, res);
+  });
+
+  //allagh stoixeiwn xrhsth
+  app.get("/profile_change", function (req, res) {
+    res.render("profile_change.ejs");
+  });
+  app.post("/profile_change", function (req, res) {
+    res.render("profile_change.ejs");
+  });
 };

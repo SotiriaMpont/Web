@@ -1,48 +1,58 @@
 const UserService = require("../Service/UserService");
 
 class AuthController {
-    #UserService = new UserService();
+  #UserService = new UserService();
 
-    async SignInAsync(req, res) {
-        const username = req.body.username;
-        const password = req.body.password;
+  async SignInAsync(req, res) {
+    //eisodos xrhsth sthn efarmogh
+    const username = req.body.username;
+    const password = req.body.password;
 
-        const result = await this.#UserService.SignInAsync(username, password);
+    const result = await this.#UserService.SignInAsync(username, password);
 
-        if (!result
-            || !result.success) {
-            return res.status(404).send({ message: "User Not found." });
-        }
-        res
-            .cookie("access_token", result.accessToken, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-            })
-            .redirect('/mainpage');
+    if (!result || !result.success) {
+      return res.status(404).send({ message: "User Not found." }); //an o xrhsths den yparxei epistrefei mhnyma la8ous
     }
+    //an uparxei epistrefei ta parakatw stoixeia
+    req.session.user = {
+      email: result.email,
+      username: result.username,
+    };
 
-    async SignUpAsync(req, res) {
-        const user = {
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-            psw_repeat: req.body.psw_repeat,
-            roles: ["moderator"]
-        }
+    res
+      .cookie("access_token", result.accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+      })
+      .redirect("/mainpage"); //pros8etei to token sto main page wste na paramenei o xrhsths sundedemenos gia 1 session
+  }
 
-        const success = await this.#UserService.SignUpAsync(user);
+  async SignUpAsync(req, res) {
+    //egrafh xrhsth
+    const user = {
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      psw_repeat: req.body.psw_repeat,
+      roles: ["moderator"],
+    };
 
-        if (!success)
-            return res.status(404).send({ message: "User Not found." });
+    const success = await this.#UserService.SignUpAsync(user);
 
-        res
-            .redirect('/login');
+    if (!success) return res.status(404).send({ message: "User Not found." });
+
+    res.redirect("/login"); // an o xrhsths dhmioyrgh8ei epituxws kanw redirext sto loginpage
+  }
+
+  SignOut(req, res) {
+    //aposyndesh xrhsth
+    console.log(req.session);
+    if (req.session && req.session.user) {
+      delete req.session.user;
+      res.clearCookie("access_token").redirect("/login");
+    } else {
+      res.redirect("/");
     }
-
-    async SignOut(res) {
-        res
-            .clearCookie("access_token")
-            .redirect('/login');
-    }
+  }
 }
 module.exports = AuthController;
