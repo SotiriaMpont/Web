@@ -1,4 +1,5 @@
 const authorization = require("../middlewares/authorization");
+const AuthController = require("../controllers/AuthController");
 const CheckModeratorRole = require("../middlewares/CheckModeratorRole");
 const Poi = require("../models/poi.model");
 
@@ -8,6 +9,15 @@ module.exports = function(app) {
     app.get('/mainpage', [authorization, CheckModeratorRole], function(req, res) {
         res.render('mainpage.ejs')
     });
+
+     //allagh stoixeiwn xrhsth
+     app.get('/mainpage/profile_change', function (req, res) {
+        res.render('profile_change.ejs')
+    });
+    app.post('/mainpage/profile_change', function (req, res) {
+        const authController = new AuthController();
+        return authController.EditAsync(req, res);
+    }); 
     
     
 

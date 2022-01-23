@@ -37,13 +37,7 @@ module.exports = function (app) {
            
     });
 
-    //allagh stoixeiwn xrhsth
-    app.get('/profile_change', function (req, res) {
-        res.render('profile_change.ejs')
-    });
-    app.post('/profile_change', function (req, res) {
-        res.render('profile_change.ejs')
-    });
+  
     
 
 

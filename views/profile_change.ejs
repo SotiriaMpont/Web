@@ -22,10 +22,12 @@
 <body>
     <h1>Edit your profile </h1>
     <div class="container">
-        <form action="/mainpage" method="post">
+        <form action="/" method="post">
                 
-            <label for="username"><b>New Username</b></label>
-            <input type="text" placeholder="Enter New Username" name="username" id="username" required>
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter current Username" name="username" id="username" required>
+            <label for="new_username"><b>New Username</b></label>
+            <input type="text" placeholder="Enter New Username(not required)" name="new_username" id="new_username" >
 
             <label for="psw"><b> New Password</b></label>
             <input type="password" placeholder="Enter new Password"  id="password"
@@ -34,7 +36,7 @@
                 required>
 
             <label for="psw-repeat"><b> Repeat new Password</b></label>
-            <input type="password" placeholder="Repeat new Password"  id="password-repeat" required>
+            <input type="password" placeholder="Repeat new Password"  id="psw_repeat" required>
                 
                 
             <button type="submit" id="submit_btn"> Submit </button>

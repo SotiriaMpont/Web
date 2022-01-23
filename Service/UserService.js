@@ -36,6 +36,30 @@ class UserService {
         };
     }
 
+    async EditAsync(username, new_username, password, psw_repeat){
+        let result
+        
+        const theuser_forupdate = await this.#repo.FindbyUserName(username)
+
+        if(theuser_forupdate){
+            if (await this.#repo.IsUserExists(new_username)) {
+                result = 'Error1';
+            }else if (password != psw_repeat) {
+                result = 'Error2';
+            //}else if (password = "(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}" ) {
+            //    result = 'Error3';
+            }else{
+                    password = bcrypt.hashSync(password); //hash password for extra security 
+                    const s = await this.#repo.EditAsync(username, new_username ,password);
+            }
+        }else
+            result = "Error4";
+
+       
+        return result;
+
+    }
+
     async SignUpAsync(user) {
         let result
         
@@ -46,7 +70,7 @@ class UserService {
             result = 'Error2';
         }else if (user.password != user.psw_repeat) {
             result = 'Error3';
-        }else if (user.password = "(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,15}" ) {
+        }else if (user.password = "(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}" ) {
             result = 'Error4';
         }else{
             user.password = bcrypt.hashSync(user.password); //hash password for extra security 
