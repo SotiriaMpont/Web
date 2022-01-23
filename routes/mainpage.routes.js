@@ -58,6 +58,12 @@ module.exports = function(app) {
     })
 
 
+    app.post('\mainpage', async(req, res) => {
+
+        const PoiController = new PoiController();
+        return await PoiController.findbyTypeFood(req, res);
+
+    })
     
 
 
