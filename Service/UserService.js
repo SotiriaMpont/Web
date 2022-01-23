@@ -30,7 +30,6 @@ class UserService {
                 success: true,
                 accessToken: token
             };
-            if(user.roles == "")
         }
         return {
             success: false
