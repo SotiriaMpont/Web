@@ -4,11 +4,10 @@ class AuthController {
     #UserService = new UserService();
 
     async SignInAsync(req, res) {
-        const email = req.body.email;
         const username = req.body.username;
         const password = req.body.password;
 
-        const result = await this.#UserService.SignInAsync(email, username, password);
+        const result = await this.#UserService.SignInAsync(username, password);
 
         if (!result
             || !result.success) {
