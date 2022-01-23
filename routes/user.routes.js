@@ -6,11 +6,11 @@ module.exports = function (app) {
 
   // arxiki selida tou login
   app.get("/login", function (req, res) {
-    res.render("login.ejs");
+    res.render("login");
   });
 
   app.get("/", function (req, res) {
-    res.render("login.ejs");
+    res.render("login");
   });
 
   app.get("/logout", authorization, (req, res) => {

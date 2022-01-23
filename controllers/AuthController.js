@@ -14,10 +14,10 @@ class AuthController {
       return res.status(404).send({ message: "User Not found." }); //an o xrhsths den yparxei epistrefei mhnyma la8ous
     }
     //an uparxei epistrefei ta parakatw stoixeia
-    req.session.user = {
-      email: result.email,
-      username: result.username,
-    };
+    // req.session.user = {
+    //   email: result.email,
+    //   username: result.username,
+    // };
 
     res
       .cookie("access_token", result.accessToken, {
