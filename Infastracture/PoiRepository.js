@@ -7,6 +7,13 @@ class PoiRepository {
             name: 'Flocafe'
         }).exec();
     }
+    
+    
+     // BRISKEI ME TYPE==FOOD 
+    async findbyTypeFood(types) {
+        const PoiModel = db.poi;
+        return await PoiModel.find({ type: "food" })
+    }
 }
 
 module.exports = PoiRepository;
