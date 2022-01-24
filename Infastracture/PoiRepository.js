@@ -12,7 +12,7 @@ class PoiRepository {
      // BRISKEI ME TYPE==FOOD 
     async findbyType(types) {
         const PoiModel = db.poi;
-        return await PoiModel.find({ types }).exec();
+        return await PoiModel.find({ types });
     }
 }
 

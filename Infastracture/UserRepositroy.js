@@ -14,14 +14,14 @@ class UserRepository {
 
         return await UserModel.exists({
             username: username
-        }).exec();
+        });
     }
     async emailAlreadyExists(email) {
         const UserModel = db.user;
 
         return await UserModel.exists({
             email: email
-        }).exec();
+        });
     }
 
     async EditAsync(username, new_username, password){
