@@ -28,19 +28,18 @@ class UserRepository {
         const UserModel = db.user;
 
         if(new_username == ""){
-            return await UserModel.collection.updateOne(
+            return await UserModel.updateMany(
                 { username : username },
                 {
                     $set: { password : password },
-                    $currentDate: { "lastModified": true }
                 }
-            )
+             )
+
         }else{
             return await UserModel.collection.updateOne(
                 { username : username },
                 {
                     $set: { username: new_username , password : password },
-                    $currentDate: { "lastModified": true }
                 }
             )
         }

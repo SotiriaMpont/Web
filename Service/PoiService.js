@@ -7,9 +7,13 @@ class PoiService {
         return await this.#repo.findbyid(id);
         
     }
-    async findbyType(types) {
+    async findbyTypelat(types) {
 
-        return await this.#repo.findbyType(types);
+        return await this.#repo.findbyTypelat(types);
+    }
+    async findbyTypelng(types) {
+
+        return await this.#repo.findbyTypelng(types);
     }
     
 }

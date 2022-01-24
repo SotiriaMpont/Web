@@ -10,15 +10,17 @@ class PoiController {
     
     
     async findbyType(req, res) {
-
-        const poiType = req.body.InputValue;
+        const poiType = req.body.search;
         const poiService = new PoiService();
 
-        const RespondePoiType = await poiService.findbyType(poiType);
-
+        const RespondePoiTypelat = await poiService.findbyTypelat(poiType);
+        const RespondePoiTypelng = await poiService.findbyTypelng(poiType);
+        
         if (poiType == 'food') {
 
-            res.send(RespondePoiType.lat, RespondePoiType.lgn);
+            res.send
+                RespondePoiTypelat
+                RespondePoiTypelng 
 
         
 
