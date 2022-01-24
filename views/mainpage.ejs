@@ -95,8 +95,8 @@
         const InputValue = req.body.getElementById("Search").value;
         return await app.post('/mainpage', async(req, res));
 
-            res.map(RespondePoiFood =>{
-                var userMarket = L.marker([RespondePoiFood.lat, RespondePoiFood.lgn]);
+            res.map(RespondePoi =>{
+                var userMarket = L.marker([RespondePoi.lat, RespondePoi.lgn]);
                 userMarket.addTo(map);
             } )
     }
