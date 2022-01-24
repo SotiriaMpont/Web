@@ -11,7 +11,7 @@ class PoiController {
     
     async findbyType(req, res) {
 
-        const poiType = req.body.types;
+        const poiType = req.body.InputValue;
         const poiService = new PoiService();
 
         const RespondePoiType = await poiService.findbyType(poiType);

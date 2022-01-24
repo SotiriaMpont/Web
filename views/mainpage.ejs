@@ -46,6 +46,7 @@
 </body>
 
 <script>
+    
     // to documenation gia tous xartes einai edw:  https://leafletjs.com/examples/quick-start/
     var layer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -89,14 +90,15 @@
     }
     // pos na kentraro ton xristi otan sunde8ei : https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjGuI-Z7tv0AhV3iv0HHcn0B4kQFnoECAcQAQ&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fel%2Fdocs%2FWeb%2FAPI%2FGeolocation%2FgetCurrentPosition&usg=AOvVaw2321yRy6Qaug2Mh_37kZtf
 
- // synarthsh gia markers
+    const PoiController = require("../controllers/PoiController");
+    // synarthsh gia markers
     async function bringeMeMarkersLocations() {
 
         const InputValue = req.body.getElementById("Search").value;
         return await app.post('/mainpage', async(req, res));
 
             res.map(RespondePoi =>{
-                var userMarket = L.marker([RespondePoi.lat, RespondePoi.lgn]);
+                var userMarket = L.marker([PoiController.RespondePoi.lat, PoiController.RespondePoi.lgn]);
                 userMarket.addTo(map);
             } )
     }
