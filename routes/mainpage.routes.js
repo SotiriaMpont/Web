@@ -9,7 +9,7 @@ module.exports = function(app) {
     app.get('/mainpage', [authorization, CheckModeratorRole], function(req, res) {
         res.render('mainpage.ejs')
     });
-    app.post('/mainpage', async (req, res) => {
+    app.post('/mainpagetypes', async (req, res) => {
         const PoiController = new PoiController();
         return await PoiController.findbyType(req, res);
     });

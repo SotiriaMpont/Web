@@ -55,7 +55,7 @@
         tileSize: 512,
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoibGZrc2pmZGtsc2pmbGtzZGpmbGtzZGZqbGsiLCJhIjoiY2twZHZ2emJyMXJpOTJubnhoNXE3dGF5MiJ9.tFk1NMKkfjT7F-0OJ4Z-Sw'
-            // get access from here :https://api.mapbox.com
+        // get access from here :https://api.mapbox.com
     })
     var map = L.map('mapid', {
         selectedArea: true,
@@ -93,14 +93,13 @@
     
     // synarthsh gia markers
     async function bringeMeMarkersLocations() {
+        const resp = await axios.get('/mainpagetypes');
 
+        res.map(RespondePoi => {
+            var userMarket = L.marker([resp.RespondePoilat, resp.RespondePoilgn]);
+            userMarket.addTo(map);
+        })
         
-        return await app.post('/mainpage', async(req, res));
-
-            res.map(RespondePoi =>{
-                var userMarket = L.marker([PoiController.RespondePoilat, PoiController.RespondePoilgn]);
-                userMarket.addTo(map);
-            } )
     }
 
         

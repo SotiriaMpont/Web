@@ -21,7 +21,7 @@ class PoiController {
             res.send
                 RespondePoiTypelat
                 RespondePoiTypelng 
-
+                
         
 
         }
