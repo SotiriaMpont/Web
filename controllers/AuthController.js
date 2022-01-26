@@ -35,8 +35,8 @@ class AuthController {
             return res.status(404).send({ message: "User already exists." });
         else if(result == "Error2")
             return res.status(404).send({ message: "Passwords don't match." });
-        //else if (result == "Error3")
-        //    return res.status(404).send({ message: "Password has unvalid form." });
+        else if (result == "Error3")
+            return res.status(404).send({ message: "Password has unvalid form." });
         else if (result == "Error4")
             return res.status(404).send({ message: "This username doesn't exist.Try again." });
         else {
