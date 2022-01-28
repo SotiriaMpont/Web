@@ -1,32 +1,19 @@
 const PoiService = require("../Service/PoiService");
 
 class PoiController {
-    async findbyid(req, res) {
-        const poiId = req.body.id;
-        const poiService = new PoiService();
-        const poi = await poiService.findbyid(poiId);
-        res.send(poi);
-    }
-    
-    
-    async findbyType(req, res) {
-        const poiType = req.body.search;
-        const poiService = new PoiService();
+  async findbyid(req, res) {
+    const poiId = req.body.id;
+    const poiService = new PoiService();
+    const poi = await poiService.findbyid(poiId);
+    res.send(poi);
+  }
 
-        const RespondePoiTypelat = await poiService.findbyTypelat(poiType);
-        const RespondePoiTypelng = await poiService.findbyTypelng(poiType);
-        
-        if (poiType == 'food') {
+  async GetCoords(req, res) {
+    const search = req.body.search;
+    const poiService = new PoiService();
 
-            res.send
-                RespondePoiTypelat
-                RespondePoiTypelng 
-                
-        
-
-        }
-
-
-    }
+    const RespondePoi = await poiService.GetCoords(search);
+    res.send(RespondePoi);
+  }
 }
 module.exports = PoiController;

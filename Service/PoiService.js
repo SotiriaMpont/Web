@@ -1,20 +1,28 @@
 const PoiRepository = require("../Infastracture/PoiRepository");
 
 class PoiService {
-    #repo = new PoiRepository();
+  #repo = new PoiRepository();
 
-    async findbyid(id) {
-        return await this.#repo.findbyid(id);
-        
-    }
-    async findbyTypelat(types) {
+  async GetCoords(search) {
+    //kalw thn findBy me to value pou exw parei apo to search
+    const query = {
+      //me ayto ton tropo ousiastika kanw to select
+      $or: [
+        {
+          name: search,
+        },
+        {
+          types: { $eq: search },
+        },
+      ],
+    };
+    const fields = {
+      _id: 0,
+      coordinates: 1,
+    };
 
-        return await this.#repo.findbyTypelat(types);
-    }
-    async findbyTypelng(types) {
-
-        return await this.#repo.findbyTypelng(types);
-    }
-    
+    const coords = await this.#repo.findBy(query, fields);
+    return coords;
+  }
 }
 module.exports = PoiService;
