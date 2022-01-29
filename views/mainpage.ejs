@@ -134,7 +134,10 @@
                   resp.coordinates.lat,
                   resp.coordinates.lng,
                 ]);
-                userMarket.addTo(map);
+                userMarket.addTo(map)
+                                .bindPopup('<b>Όνομα Καταστήματος:</br> Επισκεψιμότητα: </br>  Μέσος Όρος Επισκέψεων: </br> <a href="/SumbitKrousma">Kαταχώρηση κρούσματος</a> </p>')
+                                .openPopup();
+
               });
             },
             error: function (jqXHR, textStatus, errorThrown) {
