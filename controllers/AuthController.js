@@ -41,7 +41,7 @@ class AuthController {
             return res.status(404).send({ message: "This username doesn't exist.Try again." });
         else {
             res   
-                .redirect('/');
+                .redirect('/login');
         }
 
 

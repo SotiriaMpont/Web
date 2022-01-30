@@ -28,16 +28,16 @@ class UserRepository {
         const UserModel = db.user;
 
         if(new_username == ""){
-            return await UserModel.updateMany(
-                { username : username },
+            return await UserModel.collection('User').updateOne(
+                { username: username },
                 {
                     $set: { password : password },
                 }
              )
 
         }else{
-            return await UserModel.collection.updateOne(
-                { username : username },
+            return await UserModel.collection('User').updateOne(
+                { username: username },
                 {
                     $set: { username: new_username , password : password },
                 }
@@ -49,7 +49,7 @@ class UserRepository {
 
     async AddAsync(user) {
         const UserModel = db.user;
-        return await UserModel.create(user);
+        return await UserModel.collection('User').create(user);
     }
 }
 
