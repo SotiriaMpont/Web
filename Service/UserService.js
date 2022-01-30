@@ -70,7 +70,7 @@ class UserService {
             result = 'Error2';
         }else if (user.password != user.psw_repeat) {
             result = 'Error3';
-        }else if (user.password != "^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?])(.{8,})$" ) {
+        }else if (user.password != "(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}" ) {
             result = 'Error4';
         }else{
             user.password = bcrypt.hashSync(user.password); //hash password for extra security 

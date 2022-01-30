@@ -60,8 +60,8 @@
 
 <script>
     
-    let passwordElement = document.getElementById("psw");
-    let passwordRepeat = document.getElementById("psw_repeat")
+    let passwordElement = document.getElementById("password");
+    let passwordRepeat = document.getElementById("psw_repeat");
     var capital = document.getElementById("capital");
     var number = document.getElementById("number");
     var length = document.getElementById("length");
@@ -127,6 +127,8 @@
         }    
     }
     */
+    
+
     //check if passwords match
     function validatePassword(){
         if(passwordElement.value != passwordRepeat.value) {
@@ -136,8 +138,8 @@
         }
     }
 
-    passwordElement.onchange =  validatePassword();
-    passwordRepeat.onkeyup =  validatePassword();
+    passwordElement.onchange = validatePassword;
+    passwordRepeat.onkeyup = validatePassword;
     
    
 
