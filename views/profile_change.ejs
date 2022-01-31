@@ -67,7 +67,7 @@
 
 
     // when the form is submited
-    $("#submit_btn").click(function() {
+    $("#edit_form").submit(function() {
         //get form data
         const username = $("#username").val();
         const new_username = $("#new_username").val();
@@ -76,13 +76,13 @@
 
         
         $.ajax({
-            url: "mainpage/profile_edit",
+            url: "/mainpage/profile_edit",
             type: "post",
             data: {
-                username: username,
-                new_username: new_username,
-                password: password,
-                psw_repeat: psw_repeat
+                username: this.username,
+                new_username: this.new_username,
+                password: this.password,
+                psw_repeat: this.psw_repeat
             },
             error: function(xhr, status, error) { console.log(status,error); },
             success: function(response) {
