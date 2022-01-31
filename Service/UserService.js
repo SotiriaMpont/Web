@@ -36,24 +36,24 @@ class UserService {
         };
     }
 
-    async EditAsync(username, new_username, password, psw_repeat){
+    async EditAsync(Edituser){
         let result
         
-        const theuser_forupdate = await this.#repo.FindbyUserName(username)
 
-        if(theuser_forupdate){
-            if (await this.#repo.IsUserExists(new_username)) {
+
+        if(await this.#repo.IsUserExists(Edituser.username)){
+            if (await this.#repo.IsUserExists(Edituser.new_username)) {
                 result = 'Error1';
-            }else if (password != psw_repeat) {
+            }else if (Edituser.password != Edituser.psw_repeat) {
                 result = 'Error2';
-            }else if (password != "(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}" ) {
-                result = 'Error3';
+            //}else if (password != "(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}") {
+            //    result = 'Error3';
             }else{
-                    password = bcrypt.hashSync(password); //hash password for extra security 
-                    const s = await this.#repo.EditAsync(username, new_username ,password);
+                Edituser.password = bcrypt.hashSync(password); //hash password for extra security 
+                const s = await this.#repo.EditAsync(Edituser);
             }
         }else
-            result = "Error4";
+            result = 'Error4';
 
        
         return result;
@@ -70,8 +70,8 @@ class UserService {
             result = 'Error2';
         }else if (user.password != user.psw_repeat) {
             result = 'Error3';
-        }else if (user.password != "(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}" ) {
-            result = 'Error4';
+        //}else if (user.password !="(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}") {
+        //    result = 'Error4';
         }else{
             user.password = bcrypt.hashSync(user.password); //hash password for extra security 
             const s = await this.#repo.AddAsync(user);

@@ -22,7 +22,8 @@ module.exports = function (app) {
   //allagh stoixeiwn xrhsth
   app.get("/mainpage/profile_change", function (req, res) {
     res.render("profile_change.ejs");
-  });
+  }
+  );
   app.post("/mainpage/profile_change", async (req, res) => {
     const authController = new AuthController();
     return await authController.EditAsync(req, res);

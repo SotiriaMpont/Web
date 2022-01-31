@@ -24,23 +24,30 @@ class UserRepository {
         });
     }
 
-    async EditAsync(username, new_username, password){
+    async EditAsync(Edituser){
         const UserModel = db.user;
 
-        if(new_username == ""){
-            return await UserModel.collection('User').updateOne(
-                { username: username },
-                {
-                    $set: { password : password },
+        
+        if(Edituser.new_username == ""){
+            return await UserModel.updateOne(
+                { username: Edituser.username },
+                { $set:
+                    {
+                        password: Edituser.password
+                    }
                 }
-             )
+            )
 
-        }else{
-            return await UserModel.collection('User').updateOne(
-                { username: username },
-                {
-                    $set: { username: new_username , password : password },
+        }else{ 
+            return await UserModel.updateOne(
+                { username: Edituser.username },
+                { $set:
+                    {
+                        username: Edituser.new_username,
+                        password: Edituser.password
+                    }
                 }
+                
             )
         }
 
@@ -49,7 +56,7 @@ class UserRepository {
 
     async AddAsync(user) {
         const UserModel = db.user;
-        return await UserModel.collection('User').create(user);
+        return await UserModel.create(user);
     }
 }
 

@@ -1,5 +1,6 @@
 const UserService = require("../Service/UserService");
 
+
 class AuthController {
     #UserService = new UserService();
 
@@ -22,14 +23,17 @@ class AuthController {
             .redirect('/mainpage');
     }
     
-    async EditAsync(req, res){
-        const username = req.body.username;
-        const new_username = req.body.new_username;
-        const password = req.body.password;
-        const psw_repeat = req.body.psw_repeat;
-
+    async EditAsync(req, res) {
+        const Edituser = {
+            username: req.body.username,
+            new_username: req.body.new_username,
+            password: req.body.password,
+            psw_repeat: req.body.psw_repeat,
+        }
+        console.log(Edituser.username);
+    
         
-        const result = await this.#UserService.EditAsync(username, new_username, password, psw_repeat);
+        const result = await this.#UserService.EditAsync(Edituser);
 
         if (result == "Error1")
             return res.status(404).send({ message: "User already exists." });
@@ -55,7 +59,7 @@ class AuthController {
             psw_repeat: req.body.psw_repeat,
             roles: ["moderator"]
         }
-
+        
         const success = await this.#UserService.SignUpAsync(user);
 
         if (success == "Error1")

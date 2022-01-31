@@ -61,6 +61,7 @@
 
 </body>
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">
     
     let passwordElement = document.getElementById("password");
@@ -144,15 +145,15 @@
     passwordElement.onchange = validatePassword;
     passwordRepeat.onkeyup = validatePassword;
     
-      // when the form "#frm" is submited
+      // when the form  is submited
     $("#register_form").submit(function() {
-        // here can get form data, and define data_to_send
+        //  get form data
         const email= $("#email").val();
         const username = $("#username").val();
         const password = $("#password").val();
         const psw_repeat = $("#psw_repeat").val();
         
-        // sets the ajax() method, and included the response in a HTML tag with id="resp"
+        
         $.ajax({
             url:"/register",
             type: "post",
@@ -176,6 +177,6 @@
 
 </script>
 
-
-
 </html>
+
+
