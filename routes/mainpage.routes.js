@@ -29,15 +29,7 @@ module.exports = function (app) {
     return await authController.EditAsync(req, res);
   });
 
-  //admin
-  app.get("/admin", function (req, res) {
-    res.render("admin.ejs");
-  });
-
-  app.post("/admin", function (req, res) {
-    console.log("Eimai ston admin");
-    console.log(req.body);
-  });
+ 
 
  
 

@@ -15,8 +15,8 @@ module.exports = function(app) {
     });
 
     app.get("admin/logout", authorization, (req, res) => {
-        const authController = new AuthController();
-        return authController.SignOut(res);
+        const adminController = new AdminController();
+        return adminController.SignOut(res);
     });
 
     //pairnw ta dedomena poy kanei upload o admin

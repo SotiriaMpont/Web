@@ -16,17 +16,21 @@ class AuthController {
             || !result.success) {
             return res.status(404).send({ message: "User Not found." });
         }
-        res
-            .cookie("access_token", result.accessToken, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-            })
+       
             
         if(username=="admin")
             res
+                .cookie("access_token", result.accessToken, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                })
                 .redirect('/admin');
         else 
             res
+                .cookie("access_token", result.accessToken, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                })
                 .redirect('/mainpage')
     }
     
