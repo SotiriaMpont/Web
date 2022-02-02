@@ -1,11 +1,12 @@
 const authorization = require("../middlewares/authorization");
 const AuthController = require("../controllers/AuthController");
-const CheckModeratorRole = require("../middlewares/CheckModeratorRole");  
+const authorization = require("../middlewares/authorization");
+const CheckAdminRole = require("../middlewares/CheckAdminRole");
 
 module.exports = function(app) {
 
     //admin
-    app.get('/admin', function(req, res) {
+    app.get('/admin',[authorization,CheckAdminRole], function(req, res) {
         res.render('admin.ejs');
     });
 

@@ -1,4 +1,5 @@
 const UserService = require("../Service/UserService");
+const jwt = require("jsonwebtoken");
 
 
 class AuthController {
@@ -20,7 +21,13 @@ class AuthController {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
             })
-            .redirect('/mainpage');
+            
+        if(username=="admin")
+            res
+                .redirect('/admin');
+        else 
+            res
+                .redirect('/mainpage')
     }
     
     async EditAsync(req, res) {
