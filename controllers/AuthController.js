@@ -41,7 +41,7 @@ class AuthController {
             password: req.body.password,
             psw_repeat: req.body.psw_repeat,
         }
-        console.log(Edituser.username);
+        
     
         
         const result = await this.#UserService.EditAsync(Edituser);

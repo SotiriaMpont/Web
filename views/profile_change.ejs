@@ -29,13 +29,13 @@
             <label for="username"><b>New Username</b></label>
             <input type="text" placeholder="Enter New Username"  id="new_username" required>
 
-            <label for="psw"><b>Password</b></label>
+            <label for="psw"><b>New Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" id="password"
                 pattern="(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}"
                 title="Must contain at least one number, one uppercase letter,a symbol(eg #$*&@) and at least 8 or more characters"
                 required>
 
-            <label for="psw-repeat"><b>Repeat Password</b></label>
+            <label for="psw-repeat"><b>Repeat new Password</b></label>
             <input type="password" placeholder="Repeat Password" name="psw_repeat" id="psw_repeat" required>
             
             
@@ -76,13 +76,13 @@
 
         
         $.ajax({
-            url: "/mainpage/profile_edit",
+            url: "/mainpage/profile_change",
             type: "post",
             data: {
-                username: this.username,
-                new_username: this.new_username,
-                password: this.password,
-                psw_repeat: this.psw_repeat
+                username: username,
+                new_username: new_username,
+                password: password,
+                psw_repeat: psw_repeat
             },
             error: function(xhr, status, error) { console.log(status,error); },
             success: function(response) {
