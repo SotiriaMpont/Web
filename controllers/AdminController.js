@@ -10,7 +10,7 @@ class AdminController {
       
          // dexetai to arxeio json tou admin
 
-         const file = req.files.myFile;
+         const file = req.myFiles;
 
          // to diabazei gia na dei tis eggrafes sto susthma
          const fileData = JSON.parse(file.data);
