@@ -3,7 +3,7 @@ body {
     max-width:400px
     
 }
-div.alert-info{
+div.admin_page{
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -12,7 +12,7 @@ div.alert-info{
     background: #3dc1ca;
 
 }
-upload-button{
+upload_button{
     background-color: #4169e1;
     color: black;
     padding: 14px 20px;
@@ -30,5 +30,5 @@ canvas.myChart{
     border: 2px solid red;
     padding: 10px;
     border-bottom-left-radius: 25px;
-    background-color: #f84747;
+    background-color: #fdd5d5;
 }

@@ -9,7 +9,7 @@ class PoiRepository {
     async Upload(myDesiredEggrafes) {
       
       const PoiModel = db.poi;
-      return await PoiModel.createIndexes(myDesiredEggrafes);
+      return await PoiModel.create(myDesiredEggrafes);
 
     }
 }

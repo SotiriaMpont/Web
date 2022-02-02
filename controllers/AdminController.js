@@ -7,11 +7,12 @@ class AdminController {
     #AdminService = new AdminService();
 
     async Uploadfiles(req, res) {
-        const file = req.myFiles;
+        const file = req.files.InputFile;
+        
 
         //2 
         const fileData = JSON.parse(file.data);
-
+    
         const myDesiredEggrafes = fileData.map(eggrafh => {
             return {
                 id: eggrafh.id,
@@ -22,11 +23,10 @@ class AdminController {
                 populartimes: eggrafh.populartimes,
             }
         })
-
+    
         console.log(myDesiredEggrafes);
-         
-         //prepei na perasoun oi eggrafes sthn vash
-         const result = await this.#AdminService.Uploadfiles(myDesiredEggrafes);
+        //prepei na perasoun oi eggrafes sthn vash
+        const result = await this.#AdminService.Uploadfiles(myDesiredEggrafes);
         
 
     }
