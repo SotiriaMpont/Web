@@ -26,3 +26,9 @@ canvas.myChart{
     width:"1000"
 
 }
+.delete{
+    border: 2px solid red;
+    padding: 10px;
+    border-bottom-left-radius: 25px;
+    background-color: #f84747;
+}

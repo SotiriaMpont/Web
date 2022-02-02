@@ -39,33 +39,6 @@ module.exports = function (app) {
     console.log(req.body);
   });
 
-  //pairnw ta dedomena poy kanei upload o admin
-  app.post("/sendpoifile", async function (req, res) {
-    // dexetai to arxeio json tou admin
+ 
 
-    const file = req.files.myFile;
-
-    // to diabazei gia na dei tis eggrafes sto susthma
-    const fileData = JSON.parse(file.data);
-
-    const myDesiredEggrafes = fileData.map((eggrafh) => {
-      return {
-        id: eggrafh.id,
-        name: eggrafh.name,
-        types: eggrafh.types,
-        address: eggrafh.address,
-        coordinates: eggrafh.coordinates,
-        populartimes: eggrafh.populartimes,
-      };
-    });
-
-    console.log(myDesiredEggrafes);
-
-    //prepei na perasoun oi eggrafes sthn vash
-  });
-
-  app.post("mainpage", async (req, res) => {
-    const PoiController = new PoiController();
-    return await PoiController.findbyTypeFood(req, res);
-  });
 };

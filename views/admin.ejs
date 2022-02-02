@@ -29,25 +29,35 @@
         </div>
     </div>
     <button onclick="uploadFile()" id="upload-button"> Upload  </button>
-
-
+    <div class="delete">
+        <label>Delete all existing Positions</label>
+        <button onclick="deleteFiles()" id="delete">Delete  </button>
+    </div>   
     <canvas id="myChart" ></canvas>
 
 
 
 
 <script>
+    
+    
     function uploadFile() {
-
         var htmlElement = document.getElementById('inputFiles');
+        
         console.log(htmlElement.files[0]);
-
         var file = htmlElement.files[0];
-
         var myFiles = new FormData(); 
         myFiles.append('myFile', file)
         axios.post('/sendpoifile', myFiles);
     }
+    function deleteFiles(){
+        var answer = window.confirm("Are you sure you want to delete all data?");
+        if (answer) {
+            
+        }
+        
+    }
+    
 
 </script>
 
