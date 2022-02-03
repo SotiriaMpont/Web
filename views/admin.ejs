@@ -23,8 +23,8 @@
 
         
         <div class="upload">
-            <label  class="upload_label">Upload the Positions</label>
-            <input class="upload_control" type="file" accept=".json" id="inputFile">
+            <label  for="formFile" class="form-label">Upload the Positions</label>
+            <input  class="form-control"  type="file" accept=".json" id="inputFile">
         </div>
         
     </div>
@@ -40,16 +40,23 @@
 <script >
     
     function uploadFile() {
-        var htmlElement = document.getElementById('inputFile');
-        console.log(htmlElement.files[0]);
-        var file = htmlElement.files[0];
+        var theInput = document.getElementById('inputFile');
+        console.log(theInput.files[0]);
+        var file = theInput.files[0];
 
-        var myFile = new FormData(); //edw 8a valoume ta arxeia mas;
+        var myFile = new FormData(); 
 
         myFile.append('myFile', file)
 
-        axios.post('/sendpoifile', InputFile);
-
+        
+        axios.post('/sendpoifile', 
+            myFile
+        ).then(function(response) {
+            alert("Files uploaded");
+        }).catch(function(error) {
+            alert(error);
+        });
+                
 
     }
 
@@ -57,7 +64,13 @@
     function deleteFiles(){
         var answer = window.confirm("Are you sure you want to delete all data?");
         if (answer) {
-            
+            axios.post('/deletepoifiles')
+            .then(function(response) {
+                alert("Files uploaded");
+            }).catch(function(error) {
+                alert(error);
+            });
+             
         }
         
     }

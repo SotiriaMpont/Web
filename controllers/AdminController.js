@@ -7,28 +7,31 @@ class AdminController {
     #AdminService = new AdminService();
 
     async Uploadfiles(req, res) {
-        const file = req.files.InputFile;
+        const file = req.files.myFile;
         
-
-        //2 
         const fileData = JSON.parse(file.data);
     
-        const myDesiredEggrafes = fileData.map(eggrafh => {
+        const theNewPoi = fileData.map(newPoi => {
             return {
-                id: eggrafh.id,
-                name: eggrafh.name,
-                types: eggrafh.types,
-                address: eggrafh.address,
-                coordinates: eggrafh.coordinates,
-                populartimes: eggrafh.populartimes,
+                id: newPoi.id,
+                name: newPoi.name,
+                types: newPoi.types,
+                address: newPoi.address,
+                coordinates: newPoi.coordinates,
+                populartimes: newPoi.populartimes,
             }
         })
     
-        console.log(myDesiredEggrafes);
-        //prepei na perasoun oi eggrafes sthn vash
-        const result = await this.#AdminService.Uploadfiles(myDesiredEggrafes);
+        console.log(theNewPoi);
+        //gia na perastoun oi eggrafes
+        const result = await this.#AdminService.Uploadfiles(theNewPoi);
+        
         
 
+    }
+
+    async Deletefiles(res){
+        const result = await this.#AdminService.Deletefiles();
     }
     
 

@@ -3,9 +3,18 @@ const PoiRepository = require("../Infastracture/PoiRepository");
 class AdminService {
     #repo = new PoiRepository();
 
-    async UploasFiles(myDesiredEggrafes) {
+    async Uploadfiles(theNewPoi){
 
-        upload = await this.#repo.Upload(myDesiredEggrafes);
+        const resultforname = await this.#repo.PoiExists(theNewPoi);
+        if(resultforname)
+            console.log("Some positions already exist")
+        else{ 
+            const upload = await this.#repo.Upload(theNewPoi);
+        }
+    }
+
+    async Deletefiles(){
+        const deleteall = await this.#repo.Delete();
     }
     
 }

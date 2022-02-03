@@ -24,6 +24,10 @@ module.exports = function(app) {
         const adminController = new AdminController();
         return await adminController.Uploadfiles(req, res);
     });
+    app.post('/deletepoifiles',  async (req,res) => {
+        const adminController = new AdminController();
+        return await adminController.Deletefiles(res);
+    });
 
        
 };
