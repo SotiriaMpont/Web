@@ -28,6 +28,16 @@ module.exports = function (app) {
     const authController = new AuthController();
     return await authController.EditAsync(req, res);
   });
+   //dilosi krousmatos
+  app.get("/mainpage/dilosi", function (req, res) {
+    res.render("dilosi.ejs");
+  }
+  );
+  app.post("/mainpage/dilosi", async (req, res) => {
+    const authController = new AuthController();
+    return await authController.dilosi(req, res);
+  });
+
 
  
 

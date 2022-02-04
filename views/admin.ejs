@@ -52,7 +52,11 @@
         axios.post('/sendpoifile', 
             myFile
         ).then(function(response) {
-            alert('Files uploaded');
+            if (response="true"){
+                alert('Files uploaded');
+            }else
+                alert('Some files already exist');
+                
 
         }).catch(function(error) {
             alert(error);

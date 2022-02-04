@@ -28,29 +28,32 @@ class UserRepository {
         const UserModel = db.user;
 
         
-        if(Edituser.new_username == ""){
-            return await UserModel.updateOne(
-                { username: Edituser.username },
-                { $set:
-                    {
-                        password: Edituser.password
-                    }
+        
+        return await UserModel.updateOne(
+            { username: Edituser.username },
+            { $set:
+                {
+                    username: Edituser.new_username,
+                    password: Edituser.password
                 }
-            )
+            }
+            
+        )
+        
 
-        }else{ 
-            return await UserModel.updateOne(
-                { username: Edituser.username },
-                { $set:
-                    {
-                        username: Edituser.new_username,
-                        password: Edituser.password
-                    }
+    }
+    async addkrousma(username,krousma,date){
+        const UserModel = db.user;
+        return await UserModel.updateOne(
+            { username: username },
+            { "$set": { 
+                "krousma.$.0": krousma , 
+                "krousma.$.1": date 
                 }
-                
-            )
-        }
-
+            }
+            
+            
+        )
     }
     
 

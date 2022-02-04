@@ -49,7 +49,7 @@ class UserService {
             //}else if (password != "(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}") {
             //    result = 'Error3';
             }else{
-                Edituser.password = bcrypt.hashSync(password); //hash password for extra security 
+                Edituser.password = bcrypt.hashSync(Edituser.password); //hash password for extra security 
                 const s = await this.#repo.EditAsync(Edituser);
             }
         }else
@@ -79,6 +79,9 @@ class UserService {
 
        
         return result;
+    }
+    async dilosi(krousma,date){
+        const user = await this.#repo.addkrousma(username,krousma,date);
     }
 
 

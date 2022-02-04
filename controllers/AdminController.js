@@ -11,14 +11,14 @@ class AdminController {
         
         const fileData = JSON.parse(file.data);
     
-        const theNewPoi = fileData.map(newPoi => {
+        const theNewPoi = fileData.map(theNewPoi => {
             return {
-                id: newPoi.id,
-                name: newPoi.name,
-                types: newPoi.types,
-                address: newPoi.address,
-                coordinates: newPoi.coordinates,
-                populartimes: newPoi.populartimes,
+                id: theNewPoi.id,
+                name: theNewPoi.name,
+                types: theNewPoi.types,
+                address: theNewPoi.address,
+                coordinates: theNewPoi.coordinates,
+                populartimes: theNewPoi.populartimes,
             }
         })
     

@@ -25,13 +25,14 @@ class AuthController {
                     secure: process.env.NODE_ENV === "production",
                 })
                 .redirect('/admin');
-        else 
+        else{
             res
                 .cookie("access_token", result.accessToken, {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
                 })
                 .redirect('/mainpage')
+        }
     }
     
     async EditAsync(req, res) {
@@ -68,7 +69,8 @@ class AuthController {
             username: req.body.username,
             password: req.body.password,
             psw_repeat: req.body.psw_repeat,
-            roles: ["moderator"]
+            roles: ["moderator"],
+            krousma: [0,0]
         }
         
         const success = await this.#UserService.SignUpAsync(user);
@@ -85,6 +87,14 @@ class AuthController {
             res   
                 .redirect('/login');
         }
+    }
+    
+    async dilosi(req,res){
+        const krousma = req.body.krousma;
+        const date = req.body.date;
+        console.log(krousma,date);
+        const result = await this.#UserService.dilosi(krousma,date);
+
     }
 
     async SignOut(res) {

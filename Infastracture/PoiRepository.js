@@ -5,9 +5,11 @@ class PoiRepository {
       const PoiModel = db.poi;
       return await PoiModel.find(query, fields).exec(); //epistrefei ena array apo poi
     }
-    async PoiExists(theNewPoi){
+    async PoiExists(name){
       const PoiModel = db.poi;
-      return await PoiModel.name.includes("admin");
+      return await PoiModel.exists({
+        name: name
+    });
     }
     
     async Upload(theNewPoi) {

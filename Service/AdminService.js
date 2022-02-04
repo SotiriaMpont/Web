@@ -5,12 +5,14 @@ class AdminService {
 
     async Uploadfiles(theNewPoi){
 
-        const resultforname = await this.#repo.PoiExists(theNewPoi);
-        if(resultforname)
-            console.log("Some positions already exist")
+
+        if(await this.#repo.PoiExists(theNewPoi.name)){
+            console.log("Some positions already exist");
+            return "false";
+        }
         else{ 
             const upload = await this.#repo.Upload(theNewPoi);
-            return upload;
+            return "true";
         }
     }
 
