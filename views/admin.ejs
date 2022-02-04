@@ -52,7 +52,8 @@
         axios.post('/sendpoifile', 
             myFile
         ).then(function(response) {
-            alert("Files uploaded");
+            alert('Files uploaded');
+
         }).catch(function(error) {
             alert(error);
         });
@@ -66,7 +67,7 @@
         if (answer) {
             axios.post('/deletepoifiles')
             .then(function(response) {
-                alert("Files uploaded");
+                alert('All files deleted');
             }).catch(function(error) {
                 alert(error);
             });

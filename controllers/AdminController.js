@@ -25,13 +25,15 @@ class AdminController {
         console.log(theNewPoi);
         //gia na perastoun oi eggrafes
         const result = await this.#AdminService.Uploadfiles(theNewPoi);
-        
+
+        res.send(result);
         
 
     }
 
     async Deletefiles(res){
         const result = await this.#AdminService.Deletefiles();
+        res.send(result);
     }
     
 
