@@ -70,7 +70,7 @@ class AuthController {
             password: req.body.password,
             psw_repeat: req.body.psw_repeat,
             roles: ["moderator"],
-            krousma: [0,0]
+            krousma: ["no",0]
         }
         
         const success = await this.#UserService.SignUpAsync(user);
@@ -90,10 +90,16 @@ class AuthController {
     }
     
     async dilosi(req,res){
+        const username=req.body.username;
         const krousma = req.body.krousma;
         const date = req.body.date;
-        console.log(krousma,date);
-        const result = await this.#UserService.dilosi(krousma,date);
+        console.log(username,krousma,date);
+        const result = await this.#UserService.dilosi(username,krousma,date);
+        if (result=='Error 1'){
+            return res.status(404).send({ message: "Wrong username." });
+        }
+        else
+            return res.status(404).send({ message: "Επιτυχής δήλωση κρούσματος" });
 
     }
 

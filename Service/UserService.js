@@ -80,8 +80,15 @@ class UserService {
        
         return result;
     }
-    async dilosi(krousma,date){
-        const user = await this.#repo.addkrousma(username,krousma,date);
+    async dilosi(username,krousma,date){
+        let result;
+
+        if(await this.#repo.IsUserExists(username)){
+            const user = await this.#repo.addkrousma(username,krousma,date);
+            return user;
+        }
+        
+        return result = 'Error 1';
     }
 
 

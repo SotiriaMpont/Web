@@ -33,8 +33,8 @@ class UserRepository {
             { username: Edituser.username },
             { $set:
                 {
-                    username: Edituser.new_username,
-                    password: Edituser.password
+                    "username": Edituser.new_username,
+                    "password": Edituser.password
                 }
             }
             
@@ -47,8 +47,8 @@ class UserRepository {
         return await UserModel.updateOne(
             { username: username },
             { "$set": { 
-                "krousma.$.0": krousma , 
-                "krousma.$.1": date 
+                "krousma.0": krousma , 
+                "krousma.1": date 
                 }
             }
             
