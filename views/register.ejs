@@ -146,33 +146,33 @@
     passwordRepeat.onkeyup = validatePassword;
     
       // when the form  is submited
-    $("#register_form").submit(function() {
-        //  get form data
-        const email= $("#email").val();
-        const username = $("#username").val();
-        const password = $("#password").val();
-        const psw_repeat = $("#psw_repeat").val();
+    // $("#register_form").submit(function() {
+    //     //  get form data
+    //     const email= $("#email").val();
+    //     const username = $("#username").val();
+    //     const password = $("#password").val();
+    //     const psw_repeat = $("#psw_repeat").val();
         
         
-        $.ajax({
-            url:"/register",
-            type: "post",
-            data: {
-                email: email,
-                username: username,
-                password: password,
-                psw_repeat: psw_repeat
-            },
-            error: function(xhr, status, error) { console.log(status,error); },
-            success: function(response) {
-                console.log("register is done");
+    //     $.ajax({
+    //         url:"/register",
+    //         type: "post",
+    //         data: {
+    //             email: email,
+    //             username: username,
+    //             password: password,
+    //             psw_repeat: psw_repeat
+    //         },
+    //         error: function(xhr, status, error) { console.log(status,error); },
+    //         success: function(response) {
+    //             console.log("register is done");
 
             
-            }
-        });
+    //         }
+    //     });
 
         
-    });
+    // });
 
 
 </script>
