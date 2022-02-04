@@ -20,7 +20,7 @@
 <body>
     <div class="center">
         <h1>Login</h1>
-        <form action="/login" method="post">
+        <form action="/login" method="post" >
             <div class="txt_field">
                 <input type="text" placeholder="Enter Username" id='username' name='username' required>
                 <label for='ExampleUsername'>Username</label>
@@ -32,7 +32,7 @@
             </div>
 
             <div class="pass"> Forgot password?</div>
-            <input type="Submit" value="Login">
+            <button type="Submit" id="submit" onclick="SubmitClicked()">Login</button>
 
             <div class="signup_link">
                 Not a member? <a href="http://localhost:8080/register"> Signup </a>
@@ -45,29 +45,32 @@
 </body>
 
 <script>
-    async function SubmitClicked() { // Otan pataw to submit sto login 
+    async function SubmitClicked() { 
+        // //  get form data
+        // var username = $("#username").val();
+        // var password = $("#password").val();
+        
+        
+        
+        // $.ajax({
+        //     url:"/login",
+        //     type: "post",
+        //     data: {
+        //         username: username,
+        //         password: password
+        //     },
+        //     error: function(xhr, status, error) { console.log(status,error); },
+        //     success: function(response) {
+        //         if(response="admin"){
+        //             window.location.href = 'http://localhost:8080/admin';
+        //         }
+        //         else if(response="user" ){
+        //             window.location.href = 'http://localhost:8080/mainpage';
+        //         }
+            
+        //     }
+        // });
 
-        // //pare apo to to documment thn timi apo to elemenent me id=ExampleUsername b
-        // let username = document.getElementById('ExampleUsername').value;
-        // let password = document.getElementById('ExamplePassword').value;
-
-        // //Ftiaxnw nea metabliti DataLogin pou periexei thn username kai password (2 se 1)
-        // let DataLogin = {
-        //     username: username, // h username einai h timh ths prwths metavlitis
-        //     password: password //
-        // }
-
-        // console.log(DataLogin); // mou ta emvanizei ston terminal !
-
-        // const response = await axios.post('/login', DataLogin); //stelnw ston server to POST Request
-        // console.log(response.data);
-
-        // if (response.data == 'fail') {
-        //     alert('Exei ginei lathos')
-        // }
-        // if (response.data == 'success') {
-        //     window.location.href = 'http://localhost:8080/mainpage'
-        // }
     }
 </script>
 
