@@ -88,37 +88,36 @@
         );
         const map = L.map("mapid", {
           selectedArea: true,
-          center: [38.245865, 21.73286],
+          center: [0, 0],
           zoom: 13,
           layers: [layer],
         });
 
-        var userMarket = L.marker([37.968202, 21.73286]);
+        var userMarket = L.marker([0, 0]);
         userMarket.addTo(map);
-        // getLocation(map);
+        getLocation(map);
 
-        // function getLocation(map) {
-        //   function success(details) {
-        //     //lat
-        //     console.log("Test");
-        //     var lat = details.coords.latitude;
-        //     var lon = details.coords.longitude;
-        //     console.log(details.coords.latitude, details.coords.longitude);
-        //     L.marker([lat, lon]).addTo(map);
-        //     map.flyTo([lat, lon]);
-        //   }
+        function getLocation(map) {
+          function success(details) {
+            //lat
+            var lat = details.coords.latitude;
+            var lon = details.coords.longitude;
+            console.log(details.coords.latitude, details.coords.longitude);
+            L.marker([lat, lon], { radius: 5000 }).addTo(map);
+            map.flyTo([lat, lon]);
+          }
 
-        //   function error(error) {
-        //     console.log(error);
-        //   }
-        //   var options = {
-        //     timeout: 100000,
-        //     maximumAge: 0,
-        //   };
-        //   navigator.geolocation.getCurrentPosition(success, error, options);
-        // }
+          function error(error) {
+            console.log(error);
+          }
+          var options = {
+            timeout: 100000,
+            maximumAge: 0,
+          };
+          navigator.geolocation.getCurrentPosition(success, error, options);
+        }
 
-        // standard on load code goes here with $ prefix
+        //standard on load code goes here with $ prefix
         // note: the $ is setup inside the anonymous function of the ready command
         $("#searchBtn").click(function () {
           const search = $("#search").val();
