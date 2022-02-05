@@ -48,12 +48,21 @@ class UserRepository {
             { username: username },
             { "$set": { 
                 "krousma.0": krousma , 
-                "krousma.1": date 
+                "krousma.1": new Date(date) 
                 }
             }
             
             
         )
+    }
+
+    async eisaihdhkrousma(username,date){
+        const UserModel = db.user;
+        return await UserModel.find(
+            { username:username },
+            { krousma: { $elemMatch: { 0: "yes", 1: { $gt: date.getDate()- 14 } } } }
+        )
+        
     }
     
 

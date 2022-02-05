@@ -81,14 +81,17 @@ class UserService {
         return result;
     }
     async dilosi(username,krousma,date){
-        let result;
-
+        
+        
         if(await this.#repo.IsUserExists(username)){
+            //prepei na valoume elegxo 14 hmerwn apo dhlwsh 
+        
+              
             const user = await this.#repo.addkrousma(username,krousma,date);
             return user;
-        }
+        }else
+            return 'Error 1';
         
-        return result = 'Error 1';
     }
 
 
