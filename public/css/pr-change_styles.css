@@ -21,7 +21,9 @@ input {
     overflow: hidden;
 }
 #submit_btn{
-    background-color: #4169e1;
+    background-color: #3c66e4;
+    border-radius: 25px;
+    border: 1px solid;
     color: black;
     padding: 14px 20px;
     margin: 8px 0;
