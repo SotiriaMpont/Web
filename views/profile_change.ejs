@@ -27,7 +27,7 @@
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" id="username" required>
             <label for="username"><b>New Username</b></label>
-            <input type="text" placeholder="Enter New Username(It can stay the same)"  id="new_username" required>
+            <input type="text" placeholder="Enter New Username(It can stay the same)"name="new_username"  id="new_username" required>
 
             <label for="psw"><b>New Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" id="password"
@@ -55,15 +55,15 @@
     let passwordRepeat = document.getElementById("psw_repeat");
 
     function validatePassword(){
-        if(passwordElement.value != passwordRepeat.value) {
-            passwordRepeat.setCustomValidity("Passwords Don't Match");
-        } else {
+        if(passwordElement.value == passwordRepeat.value) {
             passwordRepeat.setCustomValidity('');
+        } else {
+            passwordRepeat.setCustomValidity("Passwords Don't Match");
         }
     }
 
-    passwordElement.onchange = validatePassword;
-    passwordRepeat.onkeyup = validatePassword;
+    password.onchange = validatePassword;
+    psw_repeat.onkeyup = validatePassword;
 
 
     // // when the form is submited
