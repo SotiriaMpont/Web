@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -104,7 +104,8 @@
              var lat = details.coords.latitude;
              var lon = details.coords.longitude;
              console.log(details.coords.latitude, details.coords.longitude);
-             L.marker([lat, lon]).addTo(map);
+             L.marker([lat,lon],{radius:5000}).addTo(map);
+             //L.marker([lat, lon]).addTo(map);
              map.flyTo([lat, lon]);
            }
 
