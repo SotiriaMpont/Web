@@ -136,9 +136,14 @@
                   resp.coordinates.lat,
                   resp.coordinates.lng,
                 ]);
-                userMarket.addTo(map)
-                                .bindPopup('<b>Όνομα Καταστήματος:</br> Επισκεψιμότητα: </br>  Μέσος Όρος Επισκέψεων: </br> <a href="/SumbitKrousma">Kαταχώρηση κρούσματος</a> </p>')
-                                .openPopup();
+                userMarket.addTo(map).on('click', markerOnClick) // an pathseis panw tou 
+
+                            function markerOnClick(e) {
+                                //  alert("hi. you clicked the marker at " + e.latlng); //emganizei to lat, lng 
+                                userMarket.bindPopup('<b>Όνομα Καταστήματος:</br> Επισκεψιμότητα: </br>  Μέσος Όρος Επισκέψεων: </br> <a href="/SumbitKrousma">Kαταχώρηση κρούσματος</a> </p>')
+                                userMarket.openPopup();
+                            }
+
 
               });
             },
