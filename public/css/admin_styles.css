@@ -1,34 +1,54 @@
 body {
-    margin:auto;
-    max-width:400px
-    
+    margin: auto;
+    max-width: 400px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(0, 0, 255, 0.3));
 }
-div.admin_page{
+
+div.admin_page {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #3dc1ca;
-
+    background: #8E76FF;
 }
-upload_button{
-    background-color: #3c66e4;
-    color: black;
-    padding: 14px 20px;
-    margin: 8px 0;
+
+#upload_button {
+    margin-top: 1rem;
+    border: 2px black;
+    padding: 8px;
     border: none;
-    cursor: pointer;
-    width: 100%;
+    background-color: #eff2f5;
 }
-canvas.myChart{
-    margin: auto;
-    width:"1000"
 
+canvas.myChart {
+    margin: auto;
+    width: "1000"
 }
-.delete{
-    border: 2px solid red;
+
+.delete {
+    margin-top: 1rem;
+    border: 2px black;
     padding: 10px;
-    border-bottom-left-radius: 25px;
-    background-color: #fdd5d5;
+    border: none;
+    background-color: #eff2f5;
+}
+
+.h1 {
+    text-align: center;
+    position: relative;
+    left: -30px;
+    font-size: 25px;
+}
+
+#exit_button {
+    margin: 1rem;
+    color: white;
+    background-color: black;
+    padding: 6px 12px;
+    border-radius: 0;
+    border: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 14px;
 }
