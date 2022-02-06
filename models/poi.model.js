@@ -22,6 +22,7 @@ const Poi = mongoose.model(
             }]
             //validate: [arrayLimit, '{PATH} exceeds the limit of 10']
         }],
+        date:{type: Date},
 
     }, 'Positions');
 

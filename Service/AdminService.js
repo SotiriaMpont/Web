@@ -5,15 +5,19 @@ class AdminService {
 
     async Uploadfiles(theNewPoi){
 
-
-        if(await this.#repo.PoiExists(theNewPoi.name)){
-            console.log("Some positions already exist");
-            return "false";
+        //elegxos diplotipon eggrafon
+        for(var i=0;i<theNewPoi.length;i++){
+            const poiname=theNewPoi[i].name
+            if(await this.#repo.PoiExists(poiname)){//tsekarw gia kathe poi an uparxei hdh
+                console.log(poiname);
+                console.log("Already exists so we didn't add it");
+            }
+            else{ 
+                const upload = await this.#repo.Upload(theNewPoi[i]);
+            }
         }
-        else{ 
-            const upload = await this.#repo.Upload(theNewPoi);
-            return "true";
-        }
+        
+       
     }
 
     async Deletefiles(){
