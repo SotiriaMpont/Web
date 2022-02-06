@@ -22,49 +22,25 @@ module.exports = function (app) {
   //allagh stoixeiwn xrhsth
   app.get("/mainpage/profile_change", function (req, res) {
     res.render("profile_change.ejs");
-  });
+  }
+  );
   app.post("/mainpage/profile_change", async (req, res) => {
     const authController = new AuthController();
     return await authController.EditAsync(req, res);
   });
-
-  //admin
-  app.get("/admin", function (req, res) {
-    res.render("admin.ejs");
+   //dilosi krousmatos
+  app.get("/mainpage/dilosi", function (req, res) {
+    res.render("dilosi.ejs");
+  }
+  );
+  app.post("/mainpage/dilosi", async (req, res) => {
+    const authController = new AuthController();
+    return await authController.dilosi(req, res);
   });
 
-  app.post("/admin", function (req, res) {
-    console.log("Eimai ston admin");
-    console.log(req.body);
-  });
 
-  //pairnw ta dedomena poy kanei upload o admin
-  app.post("/sendpoifile", async function (req, res) {
-    // dexetai to arxeio json tou admin
+ 
 
-    const file = req.files.myFile;
+ 
 
-    // to diabazei gia na dei tis eggrafes sto susthma
-    const fileData = JSON.parse(file.data);
-
-    const myDesiredEggrafes = fileData.map((eggrafh) => {
-      return {
-        id: eggrafh.id,
-        name: eggrafh.name,
-        types: eggrafh.types,
-        address: eggrafh.address,
-        coordinates: eggrafh.coordinates,
-        populartimes: eggrafh.populartimes,
-      };
-    });
-
-    console.log(myDesiredEggrafes);
-
-    //prepei na perasoun oi eggrafes sthn vash
-  });
-
-  app.post("mainpage", async (req, res) => {
-    const PoiController = new PoiController();
-    return await PoiController.findbyTypeFood(req, res);
-  });
 };

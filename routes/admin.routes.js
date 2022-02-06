@@ -1,11 +1,11 @@
+const AdminController = require("../controllers/AdminController");
 const authorization = require("../middlewares/authorization");
-const AuthController = require("../controllers/AuthController");
-const CheckModeratorRole = require("../middlewares/CheckModeratorRole");  
+const CheckAdminRole = require("../middlewares/CheckAdminRole");
 
 module.exports = function(app) {
 
     //admin
-    app.get('/admin', function(req, res) {
+    app.get('/admin',[authorization,CheckAdminRole], function(req, res) {
         res.render('admin.ejs');
     });
 
@@ -15,32 +15,19 @@ module.exports = function(app) {
     });
 
     app.get("admin/logout", authorization, (req, res) => {
-        const authController = new AuthController();
-        return authController.SignOut(res);
+        const adminController = new AdminController();
+        return adminController.SignOut(res);
     });
 
     //pairnw ta dedomena poy kanei upload o admin
-    app.post('/sendpoifile', async function(req, res) {
-        // dexetai to arxeio json tou admin
+    app.post('/sendpoifile',  async (req, res) => {
+        const adminController = new AdminController();
+        return await adminController.Uploadfiles(req, res);
+    });
+    app.post('/deletepoifiles',  async (req,res) => {
+        const adminController = new AdminController();
+        return await adminController.Deletefiles(res);
+    });
 
-        const file = req.files.myFile;
-
-        // to diabazei gia na dei tis eggrafes sto susthma
-        const fileData = JSON.parse(file.data);
-
-        const myDesiredEggrafes = fileData.map(eggrafh => {
-            return {
-                id: eggrafh.id,
-                name: eggrafh.name,
-                types: eggrafh.types,
-                address: eggrafh.address,
-                coordinates: eggrafh.coordinates,
-                populartimes: eggrafh.populartimes,
-            }
-        })
-
-        console.log(myDesiredEggrafes);
-
-        //prepei na perasoun oi eggrafes sthn vash
-    })
+       
 };

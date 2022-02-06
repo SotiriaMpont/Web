@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      charset="UTF-8"
+    />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -56,7 +60,7 @@
     <div style="height: 400px; width: 40%" id="mapid"></div>
 
     <div class="scrollmenu">
-      <a href="#Dilosi">Δήλωση κρούσματος </a>
+      <a href="/mainpage/dilosi">Δήλωση κρούσματος </a>
       <a href="#Epafi"> Πιθανή επαφή</a>
       <a href="#Kat_episkepsis">Καταχωρηση επίσκεψης</a>
       <a href="/mainpage/profile_change"> Επεξεργασία προφίλ</a>
@@ -88,18 +92,19 @@
         );
         const map = L.map("mapid", {
           selectedArea: true,
-          center: [0, 0],
+          center: [38.245865, 21.73286],
           zoom: 13,
           layers: [layer],
         });
 
-        var userMarket = L.marker([0, 0]);
+        var userMarket = L.marker([37.968202, 21.73286]);
         userMarket.addTo(map);
         getLocation(map);
 
         function getLocation(map) {
           function success(details) {
             //lat
+            console.log("Test");
             var lat = details.coords.latitude;
             var lon = details.coords.longitude;
             console.log(details.coords.latitude, details.coords.longitude);
@@ -116,12 +121,16 @@
           };
           navigator.geolocation.getCurrentPosition(success, error, options);
         }
-
-        //standard on load code goes here with $ prefix
+        // var marker = new Array();
+        // function markerDelAgain() {
+        //   for (i = 0; i < marker.length; i++) {
+        //     map.removeLayer(marker[i]);
+        //   }
+        // }
+        //  standard on load code goes here with $ prefix
         // note: the $ is setup inside the anonymous function of the ready command
         $("#searchBtn").click(function () {
           const search = $("#search").val();
-
           $.ajax({
             url: "/mainpagetypes",
             type: "post",
@@ -129,11 +138,13 @@
             success: function (response) {
               console.log(response);
               response.map((resp) => {
-                var userMarket = L.marker([
-                  resp.coordinates.lat,
-                  resp.coordinates.lng,
-                ]);
-                userMarket.addTo(map);
+                marker = L.marker([resp.coordinates.lat, resp.coordinates.lng]);
+                marker
+                  .addTo(map)
+                  .bindPopup(
+                    '<b>Όνομα Καταστήματος:</br> Επισκεψιμότητα: </br>  Μέσος Όρος Επισκέψεων: </br> <a href="/SumbitKrousma">Kαταχώρηση κρούσματος</a> </p>'
+                  )
+                  .openPopup();
               });
             },
             error: function (jqXHR, textStatus, errorThrown) {

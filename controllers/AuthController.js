@@ -1,5 +1,7 @@
 const UserService = require("../Service/UserService");
 
+
+
 class AuthController {
     #UserService = new UserService();
 
@@ -14,22 +16,36 @@ class AuthController {
             || !result.success) {
             return res.status(404).send({ message: "User Not found." });
         }
-        res
-            .cookie("access_token", result.accessToken, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-            })
-            .redirect('/mainpage');
+       
+            
+        if(username=="admin")
+            res
+                .cookie("access_token", result.accessToken, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                })
+                .redirect('/admin');
+        else{
+            res
+                .cookie("access_token", result.accessToken, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                })
+                .redirect('/mainpage')
+        }
     }
     
-    async EditAsync(req, res){
-        const username = req.body.username;
-        const new_username = req.body.new_username;
-        const password = req.body.password;
-        const psw_repeat = req.body.psw_repeat;
-
+    async EditAsync(req, res) {
+        const Edituser = {
+            username: req.body.username,
+            new_username: req.body.new_username,
+            password: req.body.password,
+            psw_repeat: req.body.psw_repeat,
+        }
         
-        const result = await this.#UserService.EditAsync(username, new_username, password, psw_repeat);
+    
+        
+        const result = await this.#UserService.EditAsync(Edituser);
 
         if (result == "Error1")
             return res.status(404).send({ message: "User already exists." });
@@ -41,7 +57,7 @@ class AuthController {
             return res.status(404).send({ message: "This username doesn't exist.Try again." });
         else {
             res   
-                .redirect('/');
+                .redirect('/login');
         }
 
 
@@ -53,9 +69,10 @@ class AuthController {
             username: req.body.username,
             password: req.body.password,
             psw_repeat: req.body.psw_repeat,
-            roles: ["moderator"]
+            roles: ["moderator"],
+            krousma: ["no",0]
         }
-
+        
         const success = await this.#UserService.SignUpAsync(user);
 
         if (success == "Error1")
@@ -70,6 +87,20 @@ class AuthController {
             res   
                 .redirect('/login');
         }
+    }
+    
+    async dilosi(req,res){
+        const username=req.body.username;
+        const krousma = req.body.krousma;
+        const date = req.body.date;
+        console.log(username,krousma,date);
+        const result = await this.#UserService.dilosi(username,krousma,date);
+        if (result=='Error 1'){
+            return res.status(404).send({ message: "Wrong username." });
+        }
+        else
+            return res.status(404).send({ message: "Επιτυχής δήλωση κρούσματος" });
+
     }
 
     async SignOut(res) {

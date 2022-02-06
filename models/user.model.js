@@ -10,6 +10,14 @@ const User = mongoose.model(
       {
         type: String
       }
+    ],
+    krousma: [
+      {
+        type: String
+      },
+      {
+        type: Date
+      }
     ]
   }
   , 'User'

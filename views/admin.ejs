@@ -19,35 +19,67 @@
 <body>
     <h1>Admin </h1>
 
-    <div class="alert-info" role="alert" >
+    <div class="admin_page" role="alert" >
 
-        <div class="mb-3">
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" accept=".json" id="inputFiles">
-            </div>
+        
+        <div class="upload">
+            <label  for="formFile" class="form-label">Upload the Positions</label>
+            <input  class="form-control"  type="file" accept=".json" id="inputFile">
         </div>
+        
     </div>
-    <button onclick="uploadFile()" id="upload-button"> Upload  </button>
+    <button onclick="uploadFile()" id="upload_button"> Upload  </button>
+    <div class="delete">
+        <label>Delete all existing Positions</label>
+        <button onclick="deleteFiles()" id="delete">Delete  </button>
+    </div>   
 
 
-    <canvas id="myChart" ></canvas>
 
 
-
-
-<script>
+<script >
+    
     function uploadFile() {
+        var theInput = document.getElementById('inputFile');
+        console.log(theInput.files[0]);
+        var file = theInput.files[0];
 
-        var htmlElement = document.getElementById('inputFiles');
-        console.log(htmlElement.files[0]);
+        var myFile = new FormData(); 
 
-        var file = htmlElement.files[0];
+        myFile.append('myFile', file)
 
-        var myFiles = new FormData(); 
-        myFiles.append('myFile', file)
-        axios.post('/sendpoifile', myFiles);
+        
+        axios.post('/sendpoifile', 
+            myFile
+        ).then(function(response) {
+            if (response="true"){
+                alert('Files uploaded');
+            }else
+                alert('Some files already exist');
+                
+
+        }).catch(function(error) {
+            alert(error);
+        });
+                
+
     }
+
+    
+    function deleteFiles(){
+        var answer = window.confirm("Are you sure you want to delete all data?");
+        if (answer) {
+            axios.post('/deletepoifiles')
+            .then(function(response) {
+                alert('All files deleted');
+            }).catch(function(error) {
+                alert(error);
+            });
+             
+        }
+        
+    }
+    
 
 </script>
 

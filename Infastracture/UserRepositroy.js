@@ -24,26 +24,36 @@ class UserRepository {
         });
     }
 
-    async EditAsync(username, new_username, password){
+    async EditAsync(Edituser){
         const UserModel = db.user;
 
-        if(new_username == ""){
-            return await UserModel.updateMany(
-                { username : username },
+        
+        
+        return await UserModel.updateOne(
+            { username: Edituser.username },
+            { $set:
                 {
-                    $set: { password : password },
+                    "username": Edituser.new_username,
+                    "password": Edituser.password
                 }
-             )
+            }
+            
+        )
+        
 
-        }else{
-            return await UserModel.collection.updateOne(
-                { username : username },
-                {
-                    $set: { username: new_username , password : password },
+    }
+    async addkrousma(username,krousma,date){
+        const UserModel = db.user;
+        return await UserModel.updateOne(
+            { username: username },
+            { "$set": { 
+                "krousma.0": krousma , 
+                "krousma.1": date 
                 }
-            )
-        }
-
+            }
+            
+            
+        )
     }
     
 

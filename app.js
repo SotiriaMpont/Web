@@ -37,6 +37,7 @@ app.use(
 
 require("./routes/user.routes")(app);
 require("./routes/mainpage.routes")(app);
+require("./routes/admin.routes")(app);
 
 const start = (port) => {
   try {
