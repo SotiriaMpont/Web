@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      charset="UTF-8"
+    />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -58,7 +62,6 @@
     <div class="scrollmenu">
       <a href="/mainpage/dilosi">Δήλωση κρούσματος </a>
       <a href="#Epafi"> Πιθανή επαφή</a>
-      <a href="#Kat_episkepsis">Καταχωρηση επίσκεψης</a>
       <a href="/mainpage/profile_change"> Επεξεργασία προφίλ</a>
       <a href="/logout"> Logout</a>
     </div>
@@ -69,7 +72,8 @@
 
     <script>
       // pos na kentraro ton xristi otan sunde8ei : https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjGuI-Z7tv0AhV3iv0HHcn0B4kQFnoECAcQAQ&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fel%2Fdocs%2FWeb%2FAPI%2FGeolocation%2FgetCurrentPosition&usg=AOvVaw2321yRy6Qaug2Mh_37kZtf
-
+      let map;
+      let currMarkers = [];
       // synarthsh gia markers
       $(document).ready(function () {
         // to documenation gia tous xartes einai edw:  https://leafletjs.com/examples/quick-start/
@@ -87,75 +91,90 @@
             // get access from here :https://api.mapbox.com
           }
         );
-        const map = L.map("mapid", {
+        map = L.map("mapid", {
           selectedArea: true,
           center: [38.245865, 21.73286],
           zoom: 13,
           layers: [layer],
         });
 
-        var userMarket = L.marker([37.968202, 21.73286]);
-        userMarket.addTo(map);
-        getLocation(map);
-
-        function getLocation(map) {
-           function success(details) {
-             //lat
-             console.log("Test");
-             var lat = details.coords.latitude;
-             var lon = details.coords.longitude;
-             console.log(details.coords.latitude, details.coords.longitude);
-             L.marker([lat,lon],{radius:5000}).addTo(map);
-             //L.marker([lat, lon]).addTo(map);
-             map.flyTo([lat, lon]);
-           }
-
-           function error(error) {
-             console.log(error);
-           }
-           var options = {
-             timeout: 100000,
-             maximumAge: 0,
-           };
-           navigator.geolocation.getCurrentPosition(success, error, options);
-        }
-
-         //  standard on load code goes here with $ prefix
-        // note: the $ is setup inside the anonymous function of the ready command
-        $("#searchBtn").click(function () {
-          const search = $("#search").val();
-
-          $.ajax({
-            url: "/mainpagetypes",
-            type: "post",
-            data: { search: search },
-            success: function (response) {
-              console.log(response);
-              response.map((resp) => {
-                var userMarket = L.marker([
-                  resp.coordinates.lat,
-                  resp.coordinates.lng,
-                ]);
-                userMarket.addTo(map).on('click', markerOnClick) // an pathseis panw tou 
-
-                            function markerOnClick(e) {
-                                //  alert("hi. you clicked the marker at " + e.latlng); //emganizei to lat, lng 
-                                userMarket.bindPopup('<b>Όνομα Καταστήματος:</br> Επισκεψιμότητα: </br>  Μέσος Όρος Επισκέψεων: </br> <a href="/SumbitKrousma">Kαταχώρηση κρούσματος</a> </p>')
-                                userMarket.openPopup();
-                            }
-
-
-              });
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-              console.log(textStatus, errorThrown);
-            },
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            console.log(position);
+            const userMarker = L.marker(
+              [position.coords.latitude, position.coords.longitude],
+              { radius: 5000 }
+            );
+            userMarker.addTo(map);
           });
-        });
+        }
       });
 
-      
-        
+      $("#searchBtn").click(function () {
+        const search = $("#search").val();
+        var greenIcon = new L.Icon({
+          iconUrl:
+            "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
+          shadowUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41],
+        });
+        var redIcon = new L.Icon({
+          iconUrl:
+            "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+          shadowUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41],
+        });
+        var orangeIcon = new L.Icon({
+          iconUrl:
+            "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png",
+          shadowUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41],
+        });
+
+        $.ajax({
+          url: "/mainpagetypes",
+          type: "post",
+          data: { search: search },
+          success: function (response) {
+            currMarkers.forEach((marker) => {
+              map.removeLayer(marker); //diagrafw tous markers apo to prohgoumeno search
+            });
+            currMarkers = [];
+            response.map((resp) => {
+              //dinw xrwma stous markers
+              marker = L.marker(
+                [resp.coordinates.lat, resp.coordinates.lng],
+                resp.populartimes <= 32
+                  ? { icon: greenIcon }
+                  : resp.populartimes > 32 && resp.populartimes <= 62
+                  ? { icon: orangeIcon }
+                  : { icon: redIcon }
+              );
+              marker
+                .addTo(map)
+                .bindPopup(
+                  `<b>Όνομα Καταστήματος:${resp.name}</br> Επισκεψιμότητα:${resp.current_popularity} </br>  Μέσος Όρος Επισκέψεων:${resp.populartimes} </br> <a href="/SumbitKrousma">Kαταχώρηση κρούσματος</a> </p>`
+                );
+              currMarkers.push(marker);
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+          },
+        });
+      });
     </script>
   </body>
 </html>
