@@ -97,6 +97,8 @@ class AuthController {
         const result = await this.#UserService.dilosi(username,krousma,date);
         if (result=='Error 1'){
             return res.status(404).send({ message: "Wrong username." });
+        }else if(result=='Error 2'){
+            return res.status(404).send({ message: "Είσαι ήδη κρούσμα" });
         }
         else
             return res.status(404).send({ message: "Επιτυχής δήλωση κρούσματος" });
