@@ -10,78 +10,76 @@
     <meta charset="UTF-8">
     <title>Admin Page</title>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
 
 
 <body>
-    <h1>Admin </h1>
+    <h1> Welcome Admin! </h1>
 
-    <div class="admin_page" role="alert" >
+    <div class="admin_page" role="alert">
 
-        
+
         <div class="upload">
-            <label  for="formFile" class="form-label">Upload the Positions</label>
-            <input  class="form-control"  type="file" accept=".json" id="inputFile">
+            <label for="formFile" class="form-label">Upload the Positions</label>
+            <input class="form-control" type="file" accept=".json" id="inputFile">
+            <button onclick="uploadFile()" id="upload_button"> Upload  </button>
         </div>
-        
+
     </div>
-    <button onclick="uploadFile()" id="upload_button"> Upload  </button>
+
     <div class="delete">
         <label>Delete all existing Positions</label>
         <button onclick="deleteFiles()" id="delete">Delete  </button>
-    </div>   
 
 
 
+    </div>
 
-<script >
-    
-    function uploadFile() {
-        var theInput = document.getElementById('inputFile');
-        console.log(theInput.files[0]);
-        var file = theInput.files[0];
+    <button onclick="SignOut()" id="exit_button"> SignOut  </button>
 
-        var myFile = new FormData(); 
 
-        myFile.append('myFile', file)
+    <script>
+        function uploadFile() {
+            var theInput = document.getElementById('inputFile');
+            console.log(theInput.files[0]);
+            var file = theInput.files[0];
 
-        
-        axios.post('/sendpoifile', 
-            myFile
-        ).then(function(response) {
-            if (response="true"){
-                alert('Files uploaded');
-            }else
-                alert('Some files already exist');
-                
+            var myFile = new FormData();
 
-        }).catch(function(error) {
-            alert(error);
-        });
-                
+            myFile.append('myFile', file)
 
-    }
 
-    
-    function deleteFiles(){
-        var answer = window.confirm("Are you sure you want to delete all data?");
-        if (answer) {
-            axios.post('/deletepoifiles')
-            .then(function(response) {
-                alert('All files deleted');
+            axios.post('/sendpoifile',
+                myFile
+            ).then(function(response) {
+                if (response = "true") {
+                    alert('Files uploaded');
+                } else
+                    alert('Some files already exist');
+
+
             }).catch(function(error) {
                 alert(error);
             });
-             
+
+
         }
-        
-    }
-    
-
-</script>
 
 
+        function deleteFiles() {
+            var answer = window.confirm("Are you sure you want to delete all data?");
+            if (answer) {
+                axios.post('/deletepoifiles')
+                    .then(function(response) {
+                        alert('All files deleted');
+                    }).catch(function(error) {
+                        alert(error);
+                    });
 
+            }
+
+        }
+    </script>
