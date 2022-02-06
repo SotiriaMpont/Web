@@ -13,34 +13,29 @@ module.exports = function (app) {
       res.render("mainpage.ejs");
     }
   );
+
   app.post("/mainpagetypes", async (req, res) => {
     const poiController = new PoiController();
-
     return await poiController.GetCoords(req, res);
   });
 
   //allagh stoixeiwn xrhsth
   app.get("/mainpage/profile_change", function (req, res) {
     res.render("profile_change.ejs");
-  }
-  );
+  });
+
   app.post("/mainpage/profile_change", async (req, res) => {
     const authController = new AuthController();
     return await authController.EditAsync(req, res);
   });
-   //dilosi krousmatos
+
+  //dilosi krousmatos
   app.get("/mainpage/dilosi", function (req, res) {
     res.render("dilosi.ejs");
-  }
-  );
+  });
+
   app.post("/mainpage/dilosi", async (req, res) => {
     const authController = new AuthController();
     return await authController.dilosi(req, res);
   });
-
-
- 
-
- 
-
 };
