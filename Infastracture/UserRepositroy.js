@@ -34,6 +34,12 @@ class UserRepository {
       },
     });
   }
+
+  async findBy(query, fields) {
+    const UserModel = db.user;
+    return await UserModel.find(query, fields).exec(); //epistrefei ena array apo poi
+  }
+  
   async addkrousma(username, krousma, date) {
     const UserModel = db.user;
     return await UserModel.updateOne(

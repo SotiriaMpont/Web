@@ -81,5 +81,14 @@ class UserService {
 
     return result;
   }
+  
+  async dilosi(username,krousma,date){
+       
+    
+    const s = await this.#repo.addkrousma(username, krousma, date);
+
+  }
+
+
 }
 module.exports = UserService;
