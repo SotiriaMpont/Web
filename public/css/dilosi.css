@@ -1,15 +1,17 @@
+
+
 body {
-    margin:auto;
-    max-width:400px;
+    margin: auto;
+    max-width: 400px;
     background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(0, 0, 255, 0.3));
-    
 }
 
 label {
     margin-right: 15px;
     line-height: 32px;
 }
-#username{
+
+#username {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -20,31 +22,26 @@ label {
 }
 
 input {
-    
     border-radius: 50%;
     width: 16px;
     height: 16px;
-
     border: 2px solid #999;
     transition: 0.2s all linear;
     margin-right: 5px;
-
     position: relative;
     top: 4px;
 }
 
 #back_button {
-    color: white;
-    background-color: black;
-    padding: 5px 10px;
-    border-radius: 0;
-    border: 0;
-    font-size: 14px;
+    margin-top: 1rem;
+    width: 30%;
+    height: 50px;
+    border: 1px solid;
+    background: #7e9bf1;
+    border-radius: 25px;
 }
 
-
-#date{
-    
+#date {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -52,17 +49,25 @@ input {
     box-sizing: border-box;
     margin-top: 6px;
     margin-bottom: 16px;
-    
 }
 
-#submit_btn{
-    color: white;
-    background-color: black;
-    padding: 5px 10px;
-    border-radius: 0;
-    border: 0;
-    font-size: 14px;
+#submit_btn {
+    left: 1px;
+    width: 35%;
+    height: 50px;
+    border: 1px solid;
+    background: #3c66e4;
+    border-radius: 25px;
+    margin-bottom: 1rem;
+    margin-left: center;
 }
 
-
-
+#Username {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
