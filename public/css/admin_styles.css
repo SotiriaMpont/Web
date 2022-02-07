@@ -11,7 +11,7 @@ div.admin_page {
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #8E76FF;
+    background: #7e9bf1;
 }
 
 #upload_button {
@@ -32,7 +32,7 @@ canvas.myChart {
     border: 2px black;
     padding: 10px;
     border: none;
-    background-color: #8E76FF;
+    background-color: #7e9bf1;
 }
 
 .h1 {
@@ -43,12 +43,10 @@ canvas.myChart {
 }
 
 #exit_button {
-    margin: 1rem;
-    color: white;
-    background-color: black;
-    padding: 6px 12px;
-    border-radius: 0;
-    border: 0;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 14px;
+    margin-top: 1rem;
+    width: 30%;
+    height: 50px;
+    border: 1px solid;
+    background: #7e9bf1;
+    border-radius: 25px;
 }
