@@ -1,9 +1,9 @@
 body {
-    margin:auto;
-    max-width:400px;
+    margin: auto;
+    max-width: 400px;
     background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(0, 0, 255, 0.3));
-    
 }
+
 input {
     width: 100%;
     padding: 12px;
@@ -12,8 +12,9 @@ input {
     box-sizing: border-box;
     margin-top: 6px;
     margin-bottom: 16px;
-  }
-.container{
+}
+
+.container {
     margin: 0;
     padding: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -21,7 +22,8 @@ input {
     height: 150hv;
     overflow: hidden;
 }
-#submit_btn{
+
+#submit_btn {
     background-color: #3c66e4;
     border-radius: 25px;
     border: 1px solid;
@@ -30,14 +32,13 @@ input {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 60%;
 }
 
 #back_button {
-    color: white;
-    background-color: black;
-    padding: 5px 10px;
-    border-radius: 0;
-    border: 0;
-    font-size: 14px;
+    width: 30%;
+    height: 40px;
+    border: 1px solid;
+    background: #7e9bf1;
+    border-radius: 20px;
 }
