@@ -4,7 +4,41 @@ const UserService = require("../Service/UserService");
 
 class AuthController {
     #UserService = new UserService();
+    //admin controllers
+    async Uploadfiles(req, res) {
+        const file = req.files.myFile;
+        
+        const fileData = JSON.parse(file.data);
+        var now = new Date(); 
+    
+        const theNewPoi = fileData.map(theNewPoi => {
+            return {
+                id: theNewPoi.id,
+                name: theNewPoi.name,
+                types: theNewPoi.types,
+                address: theNewPoi.address,
+                coordinates: theNewPoi.coordinates,
+                populartimes: theNewPoi.populartimes,
+                date: now,
+            }
+        })
+        
 
+        //console.log(theNewPoi);
+        //gia na perastoun oi eggrafes
+        const result = await this.#UserService.Uploadfiles(theNewPoi);
+
+        res.send(result);
+        
+
+    }
+
+    async Deletefiles(res){
+        const result = await this.#UserService.Deletefiles();
+        res.send(result);
+    }
+
+    //user controllers
     async SignInAsync(req, res) {
         const username = req.body.username;
         const password = req.body.password;
@@ -37,12 +71,11 @@ class AuthController {
     
     async EditAsync(req, res) {
         const Edituser = {
-            username: req.body.username,
+            username:req.body.username,
             new_username: req.body.new_username,
             password: req.body.password,
             psw_repeat: req.body.psw_repeat,
         }
-        
     
         
         const result = await this.#UserService.EditAsync(Edituser);
@@ -64,14 +97,13 @@ class AuthController {
     }
 
     async SignUpAsync(req, res) {
-        var now = new Date();
         const user = {
             email: req.body.email,
             username: req.body.username,
             password: req.body.password,
             psw_repeat: req.body.psw_repeat,
             roles: ["moderator"],
-            krousma: {thetikos:"no",date: now},
+            krousma: null
         }
         
         const success = await this.#UserService.SignUpAsync(user);
@@ -92,10 +124,9 @@ class AuthController {
     
     async dilosi(req,res){
         const username=req.body.username;
-        const krousma = req.body.krousma;
         const date = req.body.date;
-        console.log(username,krousma,date);
-        const result = await this.#UserService.dilosi(username,krousma,date);
+        console.log(username,date);
+        const result = await this.#UserService.dilosi(username,date);
         if (result=='Error 1'){
             return res.status(404).send({ message: "Wrong username." });
         }else if(result=='Error 2'){

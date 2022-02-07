@@ -38,7 +38,7 @@
 
     </div>
 
-    <button onclick="SignOut()" id="exit_button" > SignOut  </button>
+    <button onclick='location.href="/logout"' id="exit_button">SignOut</button>
 
 
     <script>
@@ -83,12 +83,5 @@
 
         }
 
-        async function SignOut(){
-
-            await axios.get('/admin/logout')
-            .catch(function(error) {
-                alert(error);
-            });
-
-        }
+    
     </script>

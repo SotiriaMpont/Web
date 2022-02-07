@@ -20,7 +20,7 @@ module.exports = function (app) {
   });
 
   //allagh stoixeiwn xrhsth
-  app.get("/mainpage/profile_change", function (req, res) {
+  app.get("/mainpage/profile_change",[authorization, CheckModeratorRole], function (req, res) {
     res.render("profile_change.ejs");
   });
 
@@ -30,7 +30,7 @@ module.exports = function (app) {
   });
 
   //dilosi krousmatos
-  app.get("/mainpage/dilosi", function (req, res) {
+  app.get("/mainpage/dilosi",[authorization, CheckModeratorRole], function (req, res) {
     res.render("dilosi.ejs");
   });
 

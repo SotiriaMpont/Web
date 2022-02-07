@@ -1,4 +1,5 @@
 const UserRepository = require("../Infastracture/UserRepositroy");
+const PoiRepository = require("../Infastracture/PoiRepository");
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config");
 const User = require("../models/user.model");
@@ -7,7 +8,29 @@ const bcrypt = require("bcryptjs");
 
 class UserService {
   #repo = new UserRepository();
+  #poirepo = new PoiRepository();
+  //admin services
+  async Uploadfiles(theNewPoi){
 
+    //elegxos diplotipon eggrafon
+    for(var i=0;i<theNewPoi.length;i++){
+        const poiname=theNewPoi[i].name
+        if(await this.#poirepo.PoiExists(poiname)){//tsekarw gia kathe poi an uparxei hdh
+            console.log(poiname);
+            console.log("Already exists so we didn't add it");
+        }
+        else{ 
+            const upload = await this.#poirepo.Upload(theNewPoi[i]);
+        }
+    }
+  }
+
+  async Deletefiles(){
+      const deleteall = await this.#poirepo.Delete();
+      return deleteall;
+  }
+
+  //user services
   async SignInAsync(username, password) {
     const user = await this.#repo.FindbyUserName(username);
 
@@ -28,6 +51,7 @@ class UserService {
       return {
         success: true,
         accessToken: token,
+        user: username
       };
     }
     return {
@@ -82,8 +106,8 @@ class UserService {
     return result;
   }
   
-  async dilosi(username,krousma,date){
-
+  async dilosi(username,date){
+    //epistrefei to array krousma
     const query = {
         username: username,
     };
@@ -91,15 +115,26 @@ class UserService {
       _id: 0,
       krousma:1,
     };
+
+    const findolddate = await this.#repo.findBy(query, fields);
+    console.log(findolddate);
+
+    if(await this.#repo.iskrousma(username)){
+      const s = await this.#repo.addkrousma(username,date);
+    }
+    var date = new Date();//twrinh hmerominia xrhsth
+    var userdate=date.getTime();//twrinh hmerominia xrhsth se timestamp
+    
+    var comparedate=findolddate[0].krousma;//h prohgoumenh hmerominia tou 
+  
+    var  comparedateInTimestamp = comparedate.getTime();//prohgoumenh hmerominia se timestamp
+
+    var added_date = new Date(comparedateInTimestamp + 12096e5); //+14 se timestamp
     
     
-    const shit = await this.#repo.findBy(query, fields);
-
-
-
-    console.log(shit);
-     
-    //const s = await this.#repo.addkrousma(username, krousma, date);
+  
+   
+    //const s = await this.#repo.addkrousma(username,date);
     
 
   }

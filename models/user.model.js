@@ -12,9 +12,8 @@ const User = mongoose.model(
       }
     ],
     krousma: {
-      thetikos: { type: String },
-      date: { type: Date }
-  },
+      type: Date ,
+    },
   }
   , 'User'
 );

@@ -39,15 +39,22 @@ class UserRepository {
     const UserModel = db.user;
     return await UserModel.find(query, fields).exec(); //epistrefei ena array apo poi
   }
+  async iskrousma(username){
+    const UserModel = db.user;
+
+    return await UserModel.exists({
+      username:username,
+      krousma:null,
+    });
+  }
   
-  async addkrousma(username, krousma, date) {
+  async addkrousma(username,date) {
     const UserModel = db.user;
     return await UserModel.updateOne(
       { username: username },
       {
         $set: {
-          "krousma.thetikos": krousma,
-          "krousma.date": date,
+          krousma: date,
         },
       }
     );

@@ -13,7 +13,9 @@ const authorization = (req, res, next) => {
         return next();
     } catch (ex) {
         console.log(ex)
+        res.locals.user = null;
         return res.sendStatus(403);
+        
     }
 };
 
