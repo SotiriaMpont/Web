@@ -11,14 +11,10 @@ const User = mongoose.model(
         type: String
       }
     ],
-    krousma: [
-      {
-        type: String
-      },
-      {
-        type: Date
-      }
-    ]
+    krousma: {
+      thetikos: { type: String },
+      date: { type: Date }
+  },
   }
   , 'User'
 );

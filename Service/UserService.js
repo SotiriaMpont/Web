@@ -83,9 +83,24 @@ class UserService {
   }
   
   async dilosi(username,krousma,date){
-       
+
+    const query = {
+        username: username,
+    };
+    const fields = {
+      _id: 0,
+      krousma:1,
+    };
     
-    const s = await this.#repo.addkrousma(username, krousma, date);
+    
+    const shit = await this.#repo.findBy(query, fields);
+
+
+
+    console.log(shit);
+     
+    //const s = await this.#repo.addkrousma(username, krousma, date);
+    
 
   }
 

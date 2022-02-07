@@ -46,8 +46,8 @@ class UserRepository {
       { username: username },
       {
         $set: {
-          "krousma.0": krousma,
-          "krousma.1": date,
+          "krousma.thetikos": krousma,
+          "krousma.date": date,
         },
       }
     );

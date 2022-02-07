@@ -64,13 +64,14 @@ class AuthController {
     }
 
     async SignUpAsync(req, res) {
+        var now = new Date();
         const user = {
             email: req.body.email,
             username: req.body.username,
             password: req.body.password,
             psw_repeat: req.body.psw_repeat,
             roles: ["moderator"],
-            krousma: ["no",0]
+            krousma: {thetikos:"no",date: now},
         }
         
         const success = await this.#UserService.SignUpAsync(user);
