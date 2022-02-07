@@ -14,7 +14,7 @@ module.exports = function(app) {
         console.log(req.body);
     });
 
-    app.get("admin/logout", authorization, (req, res) => {
+    app.get("/admin/logout", (req, res) =>{
         const adminController = new AdminController();
         return adminController.SignOut(res);
     });

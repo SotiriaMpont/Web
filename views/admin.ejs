@@ -38,11 +38,11 @@
 
     </div>
 
-    <button onclick="SignOut()" id="exit_button"> SignOut  </button>
+    <button onclick="SignOut()" id="exit_button" > SignOut  </button>
 
 
     <script>
-        function uploadFile() {
+        function uploadFile(){
             var theInput = document.getElementById('inputFile');
             console.log(theInput.files[0]);
             var file = theInput.files[0];
@@ -80,6 +80,15 @@
                     });
 
             }
+
+        }
+
+        async function SignOut(){
+
+            await axios.get('/admin/logout')
+            .catch(function(error) {
+                alert(error);
+            });
 
         }
     </script>
