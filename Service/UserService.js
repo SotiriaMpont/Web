@@ -119,22 +119,36 @@ class UserService {
     const findolddate = await this.#repo.findBy(query, fields);
     console.log(findolddate);
 
-    if(await this.#repo.iskrousma(username)){
+    if(await this.#repo.iskrousma(username)){//an date null vale thn nea hmeromhnia
       const s = await this.#repo.addkrousma(username,date);
     }
-    var date = new Date();//twrinh hmerominia xrhsth
-    var userdate=date.getTime();//twrinh hmerominia xrhsth se timestamp
+
+    var new_date = new Date(date);//twrinh hmerominia xrhsth
+
     
     var comparedate=findolddate[0].krousma;//h prohgoumenh hmerominia tou 
   
     var  comparedateInTimestamp = comparedate.getTime();//prohgoumenh hmerominia se timestamp
 
-    var added_date = new Date(comparedateInTimestamp + 12096e5); //+14 se timestamp
-    
-    
+    var dateplus14 = new Date(comparedateInTimestamp + 12096e5); //+14 se timestamp
   
-   
-    //const s = await this.#repo.addkrousma(username,date);
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+    function dateDifference(a, b) { //sugkrish hmeromhniwn
+        
+        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+    }
+
+    var difference = dateDifference(dateplus14,new_date);//sugkrinw (thn palia date+14) me thn nea
+    console.log(difference); //an den exoun operasei 14 meres tha einai arnhtikh timh
+    if(difference<0){
+      const s = await this.#repo.addkrousma(username,date);
+    }else{
+      return 'Error 1';
+    }
     
 
   }
