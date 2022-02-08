@@ -107,50 +107,52 @@ class UserService {
   }
   
   async dilosi(username,date){
-    //epistrefei to array krousma
-    const query = {
-        username: username,
-    };
-    const fields = {
-      _id: 0,
-      krousma:1,
-    };
-
-    const findolddate = await this.#repo.findBy(query, fields);
-    console.log(findolddate);
+    
 
     if(await this.#repo.iskrousma(username)){//an date null vale thn nea hmeromhnia
       const s = await this.#repo.addkrousma(username,date);
-    }
-
-    var new_date = new Date(date);//twrinh hmerominia xrhsth
-
-    
-    var comparedate=findolddate[0].krousma;//h prohgoumenh hmerominia tou 
-  
-    var  comparedateInTimestamp = comparedate.getTime();//prohgoumenh hmerominia se timestamp
-
-    var dateplus14 = new Date(comparedateInTimestamp + 12096e5); //+14 se timestamp
-  
-    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-    function dateDifference(a, b) { //sugkrish hmeromhniwn
-        
-        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-    }
-
-    var difference = dateDifference(dateplus14,new_date);//sugkrinw (thn palia date+14) me thn nea
-    console.log(difference); //an den exoun operasei 14 meres tha einai arnhtikh timh
-    if(difference<0){
-      const s = await this.#repo.addkrousma(username,date);
     }else{
-      return 'Error 1';
-    }
     
+      const query = {
+          username: username,
+      };
+      const fields = {
+        _id: 0,
+        krousma:1,
+      };
 
+      const findolddate = await this.#repo.findBy(query, fields);
+      
+
+      var new_date = new Date(date);//twrinh hmerominia xrhsth
+
+      
+      var comparedate=findolddate[0].krousma;//h prohgoumenh hmerominia tou 
+    
+      var  comparedateInTimestamp = comparedate.getTime();//prohgoumenh hmerominia se timestamp
+
+      var dateplus14 = new Date(comparedateInTimestamp + 12096e5); //+14 se timestamp
+    
+      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+      function dateDifference(a, b) { //sugkrish hmeromhniwn
+          
+          const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+          const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+          return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+      }
+
+      var difference = dateDifference(dateplus14,new_date);//sugkrinw (thn palia date+14) me thn nea
+      console.log(difference); //an den exoun operasei 14 meres tha einai arnhtikh timh
+      if(difference<0){
+        const s = await this.#repo.addkrousma(username,date);
+      }else{
+        return 'Error 1';
+      }
+      
+
+    }
   }
 
 
