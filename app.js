@@ -38,6 +38,7 @@ app.use(
 require("./routes/user.routes")(app);
 require("./routes/mainpage.routes")(app);
 require("./routes/admin.routes")(app);
+require("./routes/submitVisit.routes")(app);
 
 const start = (port) => {
   try {
