@@ -146,9 +146,10 @@ class UserService {
       var difference = dateDifference(dateplus14,new_date);//sugkrinw (thn palia date+14) me thn nea
       console.log(difference); //an den exoun operasei 14 meres tha einai arnhtikh timh
       if(difference<0){
-        const s = await this.#repo.addkrousma(username,date);
-      }else{
         return 'Error 1';
+      }else{
+        
+        const s = await this.#repo.addkrousma(username,date);
       }
       
 
