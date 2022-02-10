@@ -59,15 +59,15 @@ class UserService {
     };
   }
 
-  async EditAsync(username, new_username, password, psw_repeat) {
+  async EditAsync(Edituser) {
     let result;
 
-    const theuser_forupdate = await this.#repo.FindbyUserName(username);
+    const theuser_forupdate = await this.#repo.FindbyUserName(Edituser.username);
 
     if (theuser_forupdate) {
-      if (await this.#repo.IsUserExists(new_username)) {
+      if (await this.#repo.IsUserExists(Edituser.new_username)) {
         result = "Error1";
-      } else if (password != psw_repeat) {
+      } else if (Edituser.password != Edituser.psw_repeat) {
         result = "Error2";
         // } else if (
         //   password !=
@@ -75,8 +75,8 @@ class UserService {
         // ) {
         //result = "Error3";
       } else {
-        password = bcrypt.hashSync(password); //hash password for extra security
-        const s = await this.#repo.EditAsync(username, new_username, password);
+        Edituser.password = bcrypt.hashSync(Edituser.password); //hash password for extra security
+        const s = await this.#repo.EditAsync(Edituser);
       }
     } else result = "Error4";
 

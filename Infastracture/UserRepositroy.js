@@ -27,12 +27,15 @@ class UserRepository {
   async EditAsync(Edituser) {
     const UserModel = db.user;
 
-    return await UserModel.updateOne({
-      $set: {
-        username: Edituser.new_username,
-        password: Edituser.password,
-      },
-    });
+    return await UserModel.updateOne(
+        { username: Edituser.username },
+        {
+          $set: {
+            username: Edituser.new_username,
+            password: Edituser.password,
+          },
+        }
+    );
   }
 
   async findBy(query, fields) {
