@@ -1,5 +1,5 @@
 const authorization = require("../middlewares/authorization");
-const AuthController = require("../controllers/AuthController");
+const UserController = require("../controllers/UserController");
 const CheckModeratorRole = require("../middlewares/CheckModeratorRole");
 const Poi = require("../models/poi.model");
 const PoiController = require("../controllers/PoiController");
@@ -25,8 +25,8 @@ module.exports = function (app) {
   });
 
   app.post("/mainpage/profile_change", async (req, res) => {
-    const authController = new AuthController();
-    return await authController.EditAsync(req, res);
+    const userController = new UserController();
+    return await userController.EditAsync(req, res);
   });
 
   //dilosi krousmatos
@@ -35,7 +35,7 @@ module.exports = function (app) {
   });
 
   app.post("/mainpage/dilosi", async (req, res) => {
-    const authController = new AuthController();
-    return await authController.dilosi(req, res);
+    const userController = new UserController();
+    return await userController.dilosi(req, res);
   });
 };

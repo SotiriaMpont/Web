@@ -1,5 +1,5 @@
 const authorization = require("../middlewares/authorization");
-const AuthController = require("../controllers/AuthController");
+const UserController = require("../controllers/UserController");
 
 
 module.exports = function (app) {
@@ -13,12 +13,12 @@ module.exports = function (app) {
     });
 
     app.get("/logout", authorization, (req, res) => {
-        const authController = new AuthController();
-        return authController.SignOut(res);
+        const userController = new UserController();
+        return userController.SignOut(res);
     });
 
     app.post('/login', async (req, res) => {
-        const authController = new AuthController();
+        const authController = new UserController();
         return await authController.SignInAsync(req, res);
     });
     //selida tou register 
@@ -32,7 +32,7 @@ module.exports = function (app) {
             // if (!errors.isEmpty()) {
             //     return res.status(400).json({ errors: errors.array() });
             // }
-            const authController = new AuthController();
+            const authController = new UserController();
             return await authController.SignUpAsync(req, res);
            
     });

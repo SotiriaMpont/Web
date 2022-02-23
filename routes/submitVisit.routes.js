@@ -1,4 +1,4 @@
-const AuthController = require("../controllers/AuthController");
+const UserController = require("../controllers/UserController");
 const authorization = require("../middlewares/authorization");
 module.exports = function (app) {
   // arxiki selida tou login
@@ -7,7 +7,7 @@ module.exports = function (app) {
   });
 
   app.post("/submitVisit", async (req, res) => {
-    const authController = new AuthController();
-    return await authController.SignInAsync(req, res);
+    const userController = new UserController();
+    return await userController.SignInAsync(req, res);
   });
 };

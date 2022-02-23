@@ -1,4 +1,4 @@
-const AuthController = require("../controllers/AuthController");
+const UserController = require("../controllers/UserController");
 const authorization = require("../middlewares/authorization");
 const CheckAdminRole = require("../middlewares/CheckAdminRole");
 
@@ -15,18 +15,18 @@ module.exports = function(app) {
     });
 
     app.get("/admin/logout", (req, res) =>{
-        const authController = new AuthController();
-        return authController.SignOut(res);
+        const userController = new UserController();
+        return userController.SignOut(res);
     });
 
     //pairnw ta dedomena poy kanei upload o admin
     app.post('/sendpoifile',  async (req, res) => {
-        const authController = new AuthController();
-        return await authController.Uploadfiles(req, res);
+        const userController = new UserController();
+        return await userController.Uploadfiles(req, res);
     });
     app.post('/deletepoifiles',  async (req,res) => {
-        const authController = new AuthController();
-        return await authController.Deletefiles(res);
+        const userController = new UserController();
+        return await userController.Deletefiles(res);
     });
 
        
